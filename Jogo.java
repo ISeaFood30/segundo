@@ -1,4 +1,4 @@
-package Trabalho2SI;
+package segundo;
 
 import java.util.Random;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package Trabalho2SI;
+package segundo;
 import java.util.*;
 //2h nesta coisa
 //cenas para fazer no jogo:
