@@ -3,7 +3,7 @@ import java.util.*;
 //iniciado pelo Daniel
 public class Pilha
 {	
-	public ArrayList<Carta_Daniel> pilha;
+	protected ArrayList<Carta_Daniel> pilha;
 	
 	public Pilha(){
 		this.pilha = new ArrayList<Carta_Daniel>();
