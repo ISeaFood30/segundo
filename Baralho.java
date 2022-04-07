@@ -3,7 +3,7 @@ package Trabalho2SI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+//batatas e bananas
 public class Baralho
 {
 	private ArrayList<Carta> baralho;
