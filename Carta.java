@@ -1,75 +1,169 @@
 package segundo;
-import java.util.*;
-//2h nesta coisa
-//cenas para fazer no jogo:
-//criar uma classe do jogo
-//baralho, pilhas transicao e de armazenamento como atributos
-//metodo de baralhar
-//arraylist para cada pilha
-//importar file input stream???
-//rebobinar e por o baralho todo de novo
-//objeto jogador para guardar as informacoes
-//as pilhas mostram apenas a ultima ou a primeira
-//conta movimentos, e conta movimentos errados e andar para tras
 
-//metodo de leitura e escrita no ficheiro - metodo separado
-//public arraylist<jogador> - escrita
-// try catch, se estiver vazio retorna uma lista vazio
-
-//escrita- public void write(arraylist<jogador>, registos)
+import java.util.Random;
+//iniciado pelo Sérgio
 
 public class Carta
 {
-	protected int numero;
-	protected String naipe; 
-	protected String cor;
-	protected String rep; 
-
-	public Carta()
-	{
-		
-	}
+	private String naipe;
+	private int valor; // 1 até 13, 1 é o Ás(A), 13 é Rei(K), 12 é dama (Q), 11 é valete (J), 2 a 10 é normal
+	private String cor;
+	private String rep; // representação do valor da carta, 2 a 10, J,Q,K,A
 	
-	public Carta(int numero, String naipe)
+	private int teste1;
+	private int teste2;
+	
+
+	public void setRep(String rep)
 	{
-		this.numero = numero;
+		this.rep = rep;
+	}
+
+	public Carta(String rep, String naipe)
+	{
+		this.rep = rep;
+		if (rep == "A")
+		{
+			this.valor = 1;
+		}
+		else if (rep == "K")
+		{
+			this.valor = 13;
+		}
+		else if (rep == "Q")
+		{
+			this.valor = 12;
+		}
+		else if (rep == "J")
+		{
+			this.valor = 11;
+		}
+		else if (rep == "2")
+		{
+			this.valor = 2;
+		}
+		else if (rep == "3")
+		{
+			this.valor = 3;
+		}
+		else if (rep == "4")
+		{
+			this.valor = 4;
+		}
+		else if (rep == "5")
+		{
+			this.valor = 5;
+		}
+		else if (rep == "6")
+		{
+			this.valor = 6;
+		}
+		else if (rep == "7")
+		{
+			this.valor = 7;
+		}
+		else if (rep == "8")
+		{
+			this.valor = 8;
+		}
+		else if (rep == "9")
+		{
+			this.valor = 9;
+		}
+		else if (rep == "10")
+		{
+			this.valor = 10;
+		}
+
 		this.naipe = naipe;
-		
-		if (this.naipe.equals("C") || this.naipe.equals("O"))
+		if (naipe == "E" || naipe == "P")
 		{
-			this.cor = "vermelho";
+			this.cor = "Preto";
 		}
-		else
+		else if (naipe == "O" || naipe == "C")
 		{
-			this.cor = "preto";
+			this.cor = "Vermelho";
 		}
-		
-		if (numero == 1) {
-			this.rep = "A";
-		}
-		else if(numero == 11) {
-			this.rep = "J";
-		}
-		else if(numero == 12) {
-			this.rep = "Q";
-		}
-		else if(numero == 13) {
-			this.rep = "K";
-		}
-		else {
-			this.rep = String.valueOf(numero);
-		}		
 	}
-	
-	public int getNumero()
+/*	
+	public Carta(int teste1, int teste2)   // COSNTRUTOR QUE CRIA UMA CARTA ALEATÓRIA
 	{
-		return numero;
-	}
+		String[] reps = {"A","K","Q","J","10","9","8","7","6","5","4","3","2"};
+		String[] naipes = {"E","P","O","C"};
 
-	public void setNumero(int numero)
-	{
-		this.numero = numero;
+		// isto aqui depois tem de ser implementado no codigo do jogo, e não aqui
+		//Random random = new Random();
+		//int teste1 = random.nextInt(reps.length); // random entre 0 e reps.length(exclusive)
+		//int teste2 = random.nextInt(naipes.length); 
+		// até aqui, fazer um random e depois ter esses teste1 e teste2 como argumento deste construtor
+		
+		this.rep = reps[teste1];
+		this.naipe = naipes[teste2];
+		
+		if (rep == "A")
+		{
+			this.valor = 1;
+		}
+		else if (rep == "K")
+		{
+			this.valor = 13;
+		}
+		else if (rep == "Q")
+		{
+			this.valor = 12;
+		}
+		else if (rep == "J")
+		{
+			this.valor = 11;
+		}
+		else if (rep == "2")
+		{
+			this.valor = 2;
+		}
+		else if (rep == "3")
+		{
+			this.valor = 3;
+		}
+		else if (rep == "4")
+		{
+			this.valor = 4;
+		}
+		else if (rep == "5")
+		{
+			this.valor = 5;
+		}
+		else if (rep == "6")
+		{
+			this.valor = 6;
+		}
+		else if (rep == "7")
+		{
+			this.valor = 7;
+		}
+		else if (rep == "8")
+		{
+			this.valor = 8;
+		}
+		else if (rep == "9")
+		{
+			this.valor = 9;
+		}
+		else if (rep == "10")
+		{
+			this.valor = 10;
+		}
+		
+		if (naipe == "E" || naipe == "P")
+		{
+			this.cor = "Preto";
+		}
+		else if (naipe == "O" || naipe == "C")
+		{
+			this.cor = "Vermelho";
+		}
+		
 	}
+*/
 
 	public String getNaipe()
 	{
@@ -79,6 +173,16 @@ public class Carta
 	public void setNaipe(String naipe)
 	{
 		this.naipe = naipe;
+	}
+
+	public int getValor()
+	{
+		return valor;
+	}
+
+	public void setValor(int valor)
+	{
+		this.valor = valor;
 	}
 
 	public String getCor()
@@ -95,148 +199,94 @@ public class Carta
 	{
 		return rep;
 	}
-
-	public void setRep(String rep)
-	{
-		this.rep = rep;
-	}
-
-	public String toString() {
-		if (numero != 10) {
-			return "-----\n" + "| "+ rep + " |\n" + "| "+ naipe + " |\n" + "-----";
-		}
-		else {
-			return "-----\n" + "| "+ rep + "|\n" + "| "+ naipe + " |\n" + "-----";
-		}
-	}
 	
+	public boolean compararNaipe(Carta_Daniel outraCarta)
+	{
+		boolean teste = false;
+		if (this.getNaipe() == outraCarta.getNaipe())
+		{
+			teste = true;
+		}
+		else if (this.getNaipe() != outraCarta.getNaipe())
+		{
+			teste = false;
+		}
+		return teste;
+	}
+
+	public boolean compararCor(Carta_Daniel outraCarta)
+	{
+		boolean teste = false;
+		if (this.getCor() == outraCarta.getCor())
+		{
+			teste = true;
+		}
+		else if (this.getCor() != outraCarta.getCor())
+		{
+			teste = false;
+		}
+		return teste;
+	}
+
+	// compararNaipe() e compararCor() apenas compara se são iguais ou não, dando true ou false, respet.
+
+	public boolean menorValor(Carta outraCarta)
+	{
+		boolean teste = false;
+		if (this.getValor() < outraCarta.getValor())
+		{
+			teste = true;
+		}
+		else if (this.getValor() > outraCarta.getValor())
+		{
+			teste = false;
+		}
+		return teste;
+	}
+	// menorValor dá true se a carta a analisar tiver menor valor do que a dada como argumento,
+	// e false no caso contrário
+/*
+	public String toString() // para fazer print da carta visivel
+	{
+		String s;
+		String s1 = "-----\n";
+		String s2 = "";
+		System.out.println(s1);
+		if (this.rep != "10")
+		{
+			s2 = "| " + this.rep + " |\n";
+			//System.out.println(s2);
+		}
+		else if (this.rep == "10")
+		{
+			s2 = "| " + this.rep + "|\n";
+			//System.out.println(s2);
+		}
+
+		String s3 = "| " + this.naipe + " |\n";
+		//System.out.println(s3);
+		String s4 = "-----\n";
+		//System.out.println(s4);
+
+		s = s1 + s2 + s3 +s4;
+		return s;
+	}
+
 	public String cartaOculta()
 	{
-		return "-----\n" + "|   |\n" + "|   |\n" + "-----";
-	}
-	
-	public boolean isimmediategreaterthan(Carta outracarta){
-		if (this.numero == outracarta.numero + 1) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	
-	public boolean isimmediatesmallerthan(Carta outracarta){
-		if (this.numero == outracarta.numero - 1) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	
-	public boolean compareNaipe(Carta outraCarta)
-	{
-		if (this.getNaipe() == outraCarta.getNaipe()){
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	
-	public boolean compareCor(Carta outraCarta)
-	{
-		if (this.getCor() == outraCarta.getCor()){
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+		String s;
+		String s1 = "-----\n";
+		//System.out.println(s1);
 
-	//passar para uma pilha
-	/*public static ArrayList<Carta> Baralho() {
-		String[] naipes = {"O", "C", "E", "P"};
-		int[] representation = {1,2,3,4,5,6,7,8,9,10,11,12,13};
-		
-		ArrayList<Carta> cartas = new ArrayList<Carta>();
-		int counter = 0;
-		for(int x = 0; x < naipes.length; x++){
-			for (int y = 0; y < representation.length; y ++){
-				cartas.add(new Carta(representation[y], naipes[x]));		
-				counter ++;
-			}
-		}
-		
-		ArrayList<Carta> baralho = new ArrayList<Carta>();
-		
-		for (int i = 0; i<52; i++) {
-			int randomnum = (int)(Math.random()*cartas.size());
-			baralho.add(cartas.get(randomnum));
-			cartas.remove(randomnum);
-		}		
-		return baralho;
+		String s2 = "|   |\n";
+		//System.out.println(s2);
+
+		String s3 = "|   |\n";
+		//System.out.println(s3);
+		String s4 = "-----\n";
+		//System.out.println(s4);
+		s = s1 + s2 + s3 +s4;
+		return s ;
 	}
 	*/
-	/*
-	public static void main(String arg[])
-	{
-	ArrayList<Carta> baralho = Baralho();
-	/*for(int i = 0; i < baralho.size(); i++){
-		System.out.println(baralho.get(i));	
-	}
-	
-	//inicio do jogo
-	
-	ArrayList<Carta> parm1 = new ArrayList<Carta>(0);
-	ArrayList<Carta> parm2 = new ArrayList<Carta>(0);
-	ArrayList<Carta> parm3 = new ArrayList<Carta>(0);
-	ArrayList<Carta> parm4 = new ArrayList<Carta>(0);
-	
-	ArrayList<Carta> ptra1 = new ArrayList<Carta>(1);
-	ptra1.add(baralho.get(0));
-	baralho.remove(0);
-	ArrayList<Carta> ptra2 = new ArrayList<Carta>(2);
-	Collections.addAll(ptra2, baralho.get(0), baralho.get(1));
-	baralho.remove(0);
-	baralho.remove(0);
-	ArrayList<Carta> ptra3 = new ArrayList<Carta>(3);
-	Collections.addAll(ptra3, baralho.get(0), baralho.get(1), baralho.get(2));
-	baralho.remove(0);
-	baralho.remove(0);
-	baralho.remove(0);	
-	ArrayList<Carta> ptra4 = new ArrayList<Carta>(4);
-	Collections.addAll(ptra4, baralho.get(0), baralho.get(1), baralho.get(2), baralho.get(3));
-	baralho.remove(0);
-	baralho.remove(0);
-	baralho.remove(0);
-	baralho.remove(0);
-	ArrayList<Carta> ptra5 = new ArrayList<Carta>(5);
-	Collections.addAll(ptra5, baralho.get(0), baralho.get(1), baralho.get(2), baralho.get(3), baralho.get(4));
-	baralho.remove(0);
-	baralho.remove(0);
-	baralho.remove(0);
-	baralho.remove(0);
-	baralho.remove(0);
-	ArrayList<Carta> ptra6 = new ArrayList<Carta>(6);
-	Collections.addAll(ptra6, baralho.get(0), baralho.get(1), baralho.get(2), baralho.get(3), baralho.get(4), baralho.get(5));
-	baralho.remove(0);
-	baralho.remove(0);
-	baralho.remove(0);
-	baralho.remove(0);
-	baralho.remove(0);
-	baralho.remove(0);
-	ArrayList<Carta> ptra7 = new ArrayList<Carta>(7);
-	Collections.addAll(ptra7, baralho.get(0), baralho.get(1), baralho.get(2), baralho.get(3), baralho.get(4), baralho.get(5), baralho.get(6));
-	baralho.remove(0);
-	baralho.remove(0);
-	baralho.remove(0);
-	baralho.remove(0);
-	baralho.remove(0);
-	baralho.remove(0);
-	baralho.remove(0);
-	
-	ArrayList<Carta> naoutilizado1 = new ArrayList<Carta>();
-	ArrayList<Carta> naoutilizado2 = new ArrayList<Carta>();
-	
-	}*/
 }

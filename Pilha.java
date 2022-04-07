@@ -1,20 +1,20 @@
 package segundo;
 import java.util.*;
-
+//iniciado pelo Daniel
 public class Pilha
 {	
-	public ArrayList<Carta> pilha;
+	public ArrayList<Carta_Daniel> pilha;
 	
 	public Pilha(){
-		this.pilha = new ArrayList<Carta>();
+		this.pilha = new ArrayList<Carta_Daniel>();
 	}
 	
-	public void AddElements(ArrayList<Carta> lista) {
+	public void AddElements(ArrayList<Carta_Daniel> lista) {
 		this.pilha.addAll(lista);
 	}
 	
-	public void AddElement(Carta carta) {
-		this.pilha.add(carta);
+	public void AddElement(Carta_Daniel carta_Daniel) {
+		this.pilha.add(carta_Daniel);
 	}
 	
 	public void print() {
@@ -27,19 +27,19 @@ public class Pilha
 		String[] naipes = {"O", "C", "E", "P"};
 		int[] representation = {1,2,3,4,5,6,7,8,9,10,11,12,13};
 		
-		ArrayList<Carta> cartas = new ArrayList<Carta>();
+		ArrayList<Carta_Daniel> carta_Daniels = new ArrayList<Carta_Daniel>();
 		for(int x = 0; x < naipes.length; x++){
 			for (int y = 0; y < representation.length; y ++){
-				cartas.add(new Carta(representation[y], naipes[x]));		
+				carta_Daniels.add(new Carta_Daniel(representation[y], naipes[x]));		
 			}
 		}
 		
-		ArrayList<Carta> baralhado = new ArrayList<Carta>();
+		ArrayList<Carta_Daniel> baralhado = new ArrayList<Carta_Daniel>();
 		
 		for (int i = 0; i<52; i++) {
-			int randomnum = (int)(Math.random()*cartas.size());
-			baralhado.add(cartas.get(randomnum));
-			cartas.remove(randomnum);
+			int randomnum = (int)(Math.random()*carta_Daniels.size());
+			baralhado.add(carta_Daniels.get(randomnum));
+			carta_Daniels.remove(randomnum);
 		}	
 		Pilha baralho = new Pilha();
 		baralho.AddElements(baralhado);
@@ -47,12 +47,12 @@ public class Pilha
 		return baralho;
 	}
 	
-	public ArrayList<Carta> getPilha()
+	public ArrayList<Carta_Daniel> getPilha()
 	{
 		return pilha;
 	}
 
-	public void setPilha(ArrayList<Carta> pilha)
+	public void setPilha(ArrayList<Carta_Daniel> pilha)
 	{
 		this.pilha = pilha;
 	}

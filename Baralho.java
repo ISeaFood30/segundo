@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Baralho
 {
-	private ArrayList<Carta> baralho;
+	private ArrayList<Carta_Daniel> baralho;
 	public Baralho()
 	{
-		ArrayList<Carta> baralho = new ArrayList<Carta>();
+		ArrayList<Carta_Daniel> baralho = new ArrayList<Carta_Daniel>();
 		
 		ArrayList<String> reps = new ArrayList<String>();
 		reps.add("A");
@@ -36,27 +36,27 @@ public class Baralho
 		{
 			for (int j = 0; j < naipes.size(); j++)
 			{
-				Carta carta = new Carta(reps.get(i), naipes.get(j));
-				baralho.add(carta);
+				Carta_Daniel carta_Daniel = new Carta_Daniel(reps.get(i), naipes.get(j));
+				baralho.add(carta_Daniel);
 			}
 		}
 		this.baralho = baralho;
 	}
 
-	public ArrayList<Carta> addBaralho(Carta carta)
+	public ArrayList<Carta_Daniel> addBaralho(Carta_Daniel carta_Daniel)
 	{
-		this.baralho.add(carta);
+		this.baralho.add(carta_Daniel);
 		return baralho;
 	}
 	
-	public ArrayList<Carta> removeBaralho(Carta carta)
+	public ArrayList<Carta_Daniel> removeBaralho(Carta_Daniel carta_Daniel)
 	{
-		this.baralho.remove(carta);
+		this.baralho.remove(carta_Daniel);
 		return baralho;
 	}
 	
 	
-	public ArrayList<Carta> Baralhar()
+	public ArrayList<Carta_Daniel> Baralhar()
 	{
 		List<Integer> indices = new ArrayList<Integer>();
 		for (int i = 0; i < this.baralho.size(); i++)
@@ -77,12 +77,12 @@ public class Baralho
 		return this.baralho.size();
 	}
 
-	public ArrayList<Carta> getBaralho()
+	public ArrayList<Carta_Daniel> getBaralho()
 	{
 		return baralho;
 	}
 
-	public void setBaralho(ArrayList<Carta> baralho)
+	public void setBaralho(ArrayList<Carta_Daniel> baralho)
 	{
 		this.baralho = baralho;
 	}

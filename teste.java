@@ -8,8 +8,8 @@ public class teste
 	public static void main(String[] args)
 	{
 		// TODO Auto-generated method stub
-		Carta carta1;
-		carta1 = new Carta("9", "P");
+		Carta_Daniel carta1;
+		carta1 = new Carta_Daniel("9", "P");
 		//carta1.toString();
 		// System.out.println(carta1.getCor());
 		

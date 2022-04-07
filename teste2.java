@@ -13,13 +13,13 @@ public class teste2
 		//bara.printBaralho();
 		
 		PilhaCartas arm = new PilhaCartas("E");
-		Carta carta = new Carta("A","E");
-		Carta carta2 = new Carta("2","E");
-		Carta carta3 = new Carta("3","E");
-		Carta carta4 = new Carta("4","E");
-		Carta carta5 = new Carta("5","E");
+		Carta_Daniel carta_Daniel = new Carta_Daniel("A","E");
+		Carta_Daniel carta2 = new Carta_Daniel("2","E");
+		Carta_Daniel carta3 = new Carta_Daniel("3","E");
+		Carta_Daniel carta4 = new Carta_Daniel("4","E");
+		Carta_Daniel carta5 = new Carta_Daniel("5","E");
 	
-		arm.addArmazem(carta);
+		arm.addArmazem(carta_Daniel);
 		arm.addArmazem(carta2);
 		arm.addArmazem(carta3);
 		arm.addArmazem(carta4);

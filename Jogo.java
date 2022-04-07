@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class Jogo
 {
-	private ArrayList<Carta> baralho;
+	private ArrayList<Carta_Daniel> baralho;
 	private PilhaCartas[] pilhasT;
 	private PilhaCartas[] pilhasA;
 
@@ -52,7 +52,7 @@ public class Jogo
 			ecra[3][i] = "Pil-" + (i + 1);
 		}
 
-		ArrayList<Carta> resto = this.pilhasT[6].getBaralhoResto();
+		ArrayList<Carta_Daniel> resto = this.pilhasT[6].getBaralhoResto();
 		ecra[0][1] = resto.get(resto.size() - 1).toString();
 
 		// pilhas de transição
