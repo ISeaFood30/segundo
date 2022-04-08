@@ -4,13 +4,13 @@ import java.util.Random;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Jogo
+public class Jogo2
 {
 	private ArrayList<Carta> baralho;
 	private Pilha[] pilhasT;
 	private Pilha[] pilhasA;
 
-	public Jogo() // vai criar um jogo
+	public Jogo2() // vai criar um jogo
 	{
 		this.baralho = (new Baralho()).Baralhar();
 		this.pilhasT = new Pilha[7]; // o jogo tem 7 pilhas de transição

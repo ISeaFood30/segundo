@@ -1,4 +1,4 @@
-package segundo;
+package segundo_ex;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Baralho
 {
-	private ArrayList<Carta_Daniel> baralho;
+	private ArrayList<Carta> baralho;
 	public Baralho()
 	{
-		ArrayList<Carta_Daniel> baralho = new ArrayList<Carta_Daniel>();
+		ArrayList<Carta> baralho = new ArrayList<Carta>();
 		
 		ArrayList<String> reps = new ArrayList<String>();
 		reps.add("A");
@@ -36,40 +36,32 @@ public class Baralho
 		{
 			for (int j = 0; j < naipes.size(); j++)
 			{
-				Carta_Daniel carta_Daniel = new Carta_Daniel(reps.get(i), naipes.get(j));
-				baralho.add(carta_Daniel);
+				Carta carta = new Carta(reps.get(i), naipes.get(j));
+				baralho.add(carta);
 			}
 		}
 		this.baralho = baralho;
 	}
 
-	public ArrayList<Carta_Daniel> addBaralho(Carta_Daniel carta_Daniel)
+	public ArrayList<Carta> addBaralho(Carta carta)
 	{
-		this.baralho.add(carta_Daniel);
+		this.baralho.add(carta);
 		return baralho;
 	}
 	
-	public ArrayList<Carta_Daniel> removeBaralho(Carta_Daniel carta_Daniel)
+	public ArrayList<Carta> removeBaralho(Carta carta)
 	{
-		this.baralho.remove(carta_Daniel);
+		this.baralho.remove(carta);
 		return baralho;
 	}
 	
 	
-	public ArrayList<Carta_Daniel> Baralhar()
+	public ArrayList<Carta> Baralhar()
 	{
-		List<Integer> indices = new ArrayList<Integer>();
-		for (int i = 0; i < this.baralho.size(); i++)
-		{
-			indices.add(i);
-		}
-		Collections.shuffle(indices);
-		for (int i = 0; i < this.baralho.size(); i++)
-		{
-			this.baralho.set(i, baralho.get(indices.get(i)));
-		}
-		
-		return baralho;
+	
+		Collections.shuffle(this.baralho);
+	
+		return this.baralho ;
 	}
 
 	public int getTamanho()
@@ -77,12 +69,12 @@ public class Baralho
 		return this.baralho.size();
 	}
 
-	public ArrayList<Carta_Daniel> getBaralho()
+	public ArrayList<Carta> getBaralho()
 	{
 		return baralho;
 	}
 
-	public void setBaralho(ArrayList<Carta_Daniel> baralho)
+	public void setBaralho(ArrayList<Carta> baralho)
 	{
 		this.baralho = baralho;
 	}
@@ -91,7 +83,7 @@ public class Baralho
 	{
 		for (int j = 0; j < this.baralho.size(); j++)
 		{
-			this.baralho.get(j).toString();
+			System.out.println(this.baralho.get(j).toString());
 		}
 	}
 	

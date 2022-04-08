@@ -1,4 +1,4 @@
-package segundo;
+package segundo_ex;
 
 import java.util.Random;
 
@@ -8,14 +8,15 @@ public class teste
 	public static void main(String[] args)
 	{
 		// TODO Auto-generated method stub
-		Carta_Daniel carta1;
-		carta1 = new Carta_Daniel("9", "P");
+		Carta carta1;
+		carta1 = new Carta("9", "P");
 		//carta1.toString();
 		// System.out.println(carta1.getCor());
 		
-		//Carta carta2 = new Carta();
-		//carta2.toString();
-		//carta2.cartaOculta();
+		Carta carta2 = new Carta("A","C");
+		String s1 = carta2.toString();
+		String s2 = carta2.cartaOculta();
+		System.out.println(s1+s2);
 		
 		//System.out.println(carta1.menorValor(carta2));
 		

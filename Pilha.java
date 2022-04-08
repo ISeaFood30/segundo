@@ -1,71 +1,73 @@
-package segundo;
-import java.util.*;
-//iniciado pelo Daniel
-public class Pilha
-{	
-	protected ArrayList<Carta_Daniel> pilha;
-	
-	public Pilha(){
-		this.pilha = new ArrayList<Carta_Daniel>();
-	}
-	
-	public void AddElements(ArrayList<Carta_Daniel> lista) {
-		this.pilha.addAll(lista);
-	}
-	
-	public void AddElement(Carta_Daniel carta_Daniel) {
-		this.pilha.add(carta_Daniel);
-	}
-	
-	public void print() {
-		for(int i = 0; i < this.getPilha().size(); i++){
-			System.out.println(this.getPilha().get(i));
-		}
-	}
-	
-	public static Pilha Baralho() {
-		String[] naipes = {"O", "C", "E", "P"};
-		int[] representation = {1,2,3,4,5,6,7,8,9,10,11,12,13};
-		
-		ArrayList<Carta_Daniel> carta_Daniels = new ArrayList<Carta_Daniel>();
-		for(int x = 0; x < naipes.length; x++){
-			for (int y = 0; y < representation.length; y ++){
-				carta_Daniels.add(new Carta_Daniel(representation[y], naipes[x]));		
-			}
-		}
-		
-		ArrayList<Carta_Daniel> baralhado = new ArrayList<Carta_Daniel>();
-		
-		for (int i = 0; i<52; i++) {
-			int randomnum = (int)(Math.random()*carta_Daniels.size());
-			baralhado.add(carta_Daniels.get(randomnum));
-			carta_Daniels.remove(randomnum);
-		}	
-		Pilha baralho = new Pilha();
-		baralho.AddElements(baralhado);
-		
-		return baralho;
-	}
-	
-	public ArrayList<Carta_Daniel> getPilha()
-	{
-		return pilha;
-	}
+package segundo_ex;
 
-	public void setPilha(ArrayList<Carta_Daniel> pilha)
+import java.util.ArrayList;
+
+public class Pilha
+{
+
+	private ArrayList<Carta> pilha;
+
+	public Pilha() // pilha de transição, desde a 1 à 7
 	{
+		ArrayList<Carta> pilha = new ArrayList<Carta>();
 		this.pilha = pilha;
 	}
-
-	public static void main(String args[]) {
-		//algo esta errado
-		Pilha baralho = new Pilha();
-		baralho = Pilha.Baralho();
-		baralho.print();
-		//System.out.println(baralho.getPilha().size());
-		
-		//for(int i = 0; i < baralho.getPilha().size(); i++){
-			//System.out.println(baralho.getPilha().get(i));
-		//}
+	
+	public  ArrayList<Carta> addCarta(Carta carta)
+	{
+		this.pilha.add(carta);
+		return this.pilha;
 	}
+	
+	public ArrayList<Carta> addCP(Pilha pil_destino)
+	{
+		Carta carta = this.pilha.get(this.pilha.size()-1);
+		return pil_destino.addCarta(carta);
+	}
+
+	public  ArrayList<Carta> removeCarta(Carta carta)
+	{
+		this.pilha.remove(carta);
+		return this.pilha;
+	}
+	
+	
+	public ArrayList<Carta> addArmazem(ArrayList<Carta> pilhaA, Carta carta)
+	{
+		this.pilha = pilhaA;
+		if (this.pilha.size() == 0 && carta.getRep() == "A") // o Às tem de ser a primeira nestas pilhas de
+																// armazenamento
+		{
+			this.pilha.add(carta);
+		}
+		else if (this.pilha.size() > 0 && carta.getNaipe() == this.pilha.get(this.pilha.size() - 1).getNaipe()
+				&& carta.getValor() - this.pilha.get(this.pilha.size() - 1).getValor() == 1)
+		{
+			this.pilha.add(carta);
+		}
+		else
+		{
+			System.out.println("Essa operação não é permitida.");
+		}
+		return this.pilha;
+	}
+	
+	
+	public void printPilha() // dá para fazer o printo na inicialização do jogo
+	{ // usado apenas para teste
+		for (int i = 0; i <= (this.pilha).size() - 1; i++)
+		{
+
+			System.out.println(this.pilha.get(i).toString());
+
+		}
+		return;
+	}
+
+	public ArrayList<Carta> getPilha()
+	{
+		return this.pilha;
+	}
+
+
 }
