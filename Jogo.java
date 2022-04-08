@@ -1,5 +1,5 @@
 package segundo;
-//bananas
+
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +13,7 @@ public class Jogo
 	public Jogo() // vai criar um jogo
 	{
 		this.baralho = (new Baralho()).Baralhar();
-		this.pilhasT = new Pilha[7]; // o jogo tem 7 pilhas de transição
+		this.pilhasT = new Pilha[7]; // o jogo tem 7 pilhas de transiÃ§Ã£o
 		this.pilhasA = new Pilha[4]; // 4 pilhas de armazenamento
 	}
 
@@ -69,7 +69,7 @@ public class Jogo
 		}
 		ecra[3][0] = "| " + resto.get(resto.size() - 1).getNaipe() + " | ";
 		ecra[4][0] = "----- ";
-		// pilhas de transição
+		// pilhas de transiÃ§Ã£o
 
 		for (int j = 0; j < 7; j++)
 		{
@@ -189,7 +189,7 @@ public class Jogo
 			}
 		}
 
-		// pilhas de transição
+		// pilhas de transiÃ§Ã£o
 
 		for (int j = 0; j < 7; j++)
 		{
