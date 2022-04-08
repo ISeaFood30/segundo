@@ -7,7 +7,7 @@ public class teste3
 	{
 		// TODO Auto-generated method stub
 		Jogo jogo = new Jogo();
-		jogo.init();
+		jogo.start();
 		jogo.representJogoInit();
 	}
 

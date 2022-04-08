@@ -1,4 +1,4 @@
-package segundo_ex;
+package segundo;
 
 import java.util.ArrayList;
 import java.util.Random;
