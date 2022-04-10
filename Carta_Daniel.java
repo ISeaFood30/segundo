@@ -2,7 +2,7 @@ package segundo;
 import java.util.*;
 //iniciado pelo Daniel
 
-//2h nesta coisa +4h
+//2h nesta coisa +4h +1 
 //cenas para fazer no jogo:
 //criar uma classe do jogo
 //baralho, pilhas transicao e de armazenamento como atributos
