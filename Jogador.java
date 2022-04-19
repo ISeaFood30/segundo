@@ -33,6 +33,7 @@ public class Jogador implements Serializable
 	public static void main(String[] arg) throws FileNotFoundException, IOException, ClassNotFoundException{
 		//leitura e escrita dos registos 
 		//esta parte de leitura e escrita no ficheiro nao me esta a funcionar, depois pergunto
+		//try catch para criação do ficheiro, podemos nao o ter ja criado
 		ArrayList<Jogador> registos = new ArrayList<Jogador>();
 		FileInputStream fos = new FileInputStream("db.tmp");
 		ObjectInputStream oos = new ObjectInputStream(fos);

@@ -46,7 +46,7 @@ public class teste4
 		}
 		Jogo jogo = new Jogo();
 		jogo.start();
-		jogo.representJogoInit();
+		jogo.representJogo();
 
 	}
 

@@ -3,7 +3,8 @@ package segundo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+//idealmente nao conseguimos eliminar este objeto?? para mim parece desencessario
+//ate porque o nosso baralho tem que ser dividido em 2 pilhas
 public class Baralho
 {
 	private ArrayList<Carta> baralho;
