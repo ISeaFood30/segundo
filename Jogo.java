@@ -156,6 +156,7 @@ public class Jogo
 			ecra[7][i] = "Pil-" + (i + 1) + " ";
 		}
 
+		//representacao do baralho, temos de o partir em 2 e representamos uma carta em cada um. podem ou nao estar as 2 reveladas
 		//2o monte, aquele em que se pode mexer
 		//esta maneira nao e ideal para representacao
 		ecra[1][1] = "----- ";
@@ -185,6 +186,7 @@ public class Jogo
 		ecra[4][0] = "----- ";
 
 		// pilhas de armazenamento
+		//so precisamos de representar a ultima carta, todas as outras estao escondidas
 		for (int k = 0; k < 4; k++)
 		{
 			if (this.pilhasT[k] != null && this.pilhasT[k].getPilha().isEmpty() != false)
@@ -205,6 +207,7 @@ public class Jogo
 		}
 
 		// pilhas de transição
+		// precisamos de representar todas, por isso temos de ter cuidado de sao visible ou nao
 		for (int j = 0; j < 7; j++)
 		{
 			for (int i = 0; i < (this.pilhasT[j].getPilha()).size(); i++)
