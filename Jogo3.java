@@ -20,9 +20,7 @@ public class Jogo3
 		Pilha baralho = new Pilha().criaBaralho();
 		baralho.Baralhar();
 		for (Carta i:baralho.getPilha()) {
-			i.setVisible(false);
-
-			
+			i.setVisible(false);	
 		}
 		for (int i = 0; i < pilhasT.length; i++)
 		{

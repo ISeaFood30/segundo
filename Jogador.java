@@ -5,7 +5,7 @@ import java.io.*;
 
 public class Jogador implements Serializable
 {
-	
+	protected String nome;
 	protected String pass;
 	protected String email;
 	protected Pilha[] armazenamento = new Pilha[4];
@@ -41,14 +41,29 @@ public class Jogador implements Serializable
 		registos=(ArrayList) oos.readObject();
 		oos.close();
 		
-		// perguntamos credenciais
-		Jogador nome = new Jogador("bananas@gmail.com", "batatascozidas");
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Insira o seu email: ");
+		String email = sc.nextLine();
+		sc.nextLine();
+		
+		System.out.println("Insira a sua password: ");
+		String password = sc.nextLine();
+		sc.nextLine();
+		
+		
+		Jogador dummy = new Jogador("bananas@gmail.com", "batatascozidas");
 		//verificar se esta ou nao nos registos, retirar os dados ou adicionar
-		if (registos.contains(nome)){
-			nome = registos.get(registos.indexOf(nome));
+		if (registos.contains(dummy)){
+			dummy = registos.get(registos.indexOf(dummy));
 		}
 		else 
-			registos.add(nome);
+		{
+			System.out.println("Qual é o seu nome? ");
+			nome = sc.nextLine();
+			sc.nextLine();
+			
+		}
 		//comecamos o jogo ou retomamos o jogo ou qualquer coisa
 		//quer sair da sessao
 		//damos update aos coisos do jogador nome
