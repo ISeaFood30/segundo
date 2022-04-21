@@ -10,7 +10,8 @@ public class Jogador implements Serializable
 	protected String email;
 	protected Pilha[] armazenamento = new Pilha[4];
 	protected Pilha[] transicao = new Pilha[7];
-	//protected pilha[] baralho = new pilha[2]; 
+	protected Pilha[] baralho = new Pilha[2]; 
+	//protected jogadas
 	
 	protected ArrayList<Integer> vitorias;
 

@@ -1,10 +1,9 @@
 package segundo;
 
-import java.util.ArrayList;
-
+import java.util.*;
+//ha aqui metodos que nao faz sentido darem return, depois temos de ver isto
 public class Pilha
 {
-
 	private ArrayList<Carta> pilha;
 
 	public Pilha() // pilha de transição, desde a 1 à 7
@@ -57,9 +56,7 @@ public class Pilha
 	{ // usado apenas para teste
 		for (int i = 0; i <= (this.pilha).size() - 1; i++)
 		{
-
 			System.out.println(this.pilha.get(i).toString());
-
 		}
 		return;
 	}
@@ -68,6 +65,40 @@ public class Pilha
 	{
 		return this.pilha;
 	}
+	
+	
+	public void setPilha(ArrayList<Carta> pilha)
+	{
+		this.pilha = pilha;
+	}
 
+	public void Baralhar()
+	{
+		Collections.shuffle(this.pilha);
+	}
+	
+	public int Size()
+	{
+		return this.pilha.size();
+	}
+	
+	public Pilha criaBaralho() 
+	{
+		String[] naipes = {"O", "C", "E", "P"};
+		String[] representation = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
+		
+		ArrayList<Carta> cartas = new ArrayList<Carta>();
+		int counter = 0;
+		for(int x = 0; x < naipes.length; x++)
+		{
+			for (int y = 0; y < representation.length; y ++)
+			{
+				cartas.add(new Carta(representation[y], naipes[x]));		
+				counter ++;
+			}
+		}
+		this.pilha = cartas;
+		return this;
+	}
 
 }
