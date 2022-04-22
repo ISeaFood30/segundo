@@ -11,8 +11,7 @@ public class Jogador implements Serializable
 	protected Pilha[] armazenamento = new Pilha[4];
 	protected Pilha[] transicao = new Pilha[7];
 	protected Pilha[] baralho = new Pilha[2]; 
-	//protected jogadas
-	
+	protected double jogadas;
 	protected ArrayList<Integer> vitorias;
 
 	public Jogador(String email, String pass)
@@ -30,7 +29,86 @@ public class Jogador implements Serializable
 			return false;
 	}
 	
-	
+	public String getNome()
+	{
+		return nome;
+	}
+
+	public void setNome(String nome)
+	{
+		this.nome = nome;
+	}
+
+	public String getPass()
+	{
+		return pass;
+	}
+
+	public void setPass(String pass)
+	{
+		this.pass = pass;
+	}
+
+	public String getEmail()
+	{
+		return email;
+	}
+
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
+
+	public Pilha[] getArmazenamento()
+	{
+		return armazenamento;
+	}
+
+	public void setArmazenamento(Pilha[] armazenamento)
+	{
+		this.armazenamento = armazenamento;
+	}
+
+	public Pilha[] getTransicao()
+	{
+		return transicao;
+	}
+
+	public void setTransicao(Pilha[] transicao)
+	{
+		this.transicao = transicao;
+	}
+
+	public Pilha[] getBaralho()
+	{
+		return baralho;
+	}
+
+	public void setBaralho(Pilha[] baralho)
+	{
+		this.baralho = baralho;
+	}
+
+	public double getJogadas()
+	{
+		return jogadas;
+	}
+
+	public void setJogadas(double jogadas)
+	{
+		this.jogadas = jogadas;
+	}
+
+	public ArrayList<Integer> getVitorias()
+	{
+		return vitorias;
+	}
+
+	public void setVitorias(ArrayList<Integer> vitorias)
+	{
+		this.vitorias = vitorias;
+	}
+
 	public static void main(String[] arg) throws FileNotFoundException, IOException, ClassNotFoundException{
 		//leitura e escrita dos registos 
 		//esta parte de leitura e escrita no ficheiro nao me esta a funcionar, depois pergunto
@@ -51,6 +129,17 @@ public class Jogador implements Serializable
 		String password = sc.nextLine();
 		sc.nextLine();
 		
+		//verificar se o jogador esta nos registos
+		for (Jogador i : registos)
+		{
+			if (i.getEmail().equals(email))
+			{
+				if (i.getPass().equals(password))
+				{
+					
+				}
+			}
+		}
 		
 		Jogador dummy = new Jogador("bananas@gmail.com", "batatascozidas");
 		//verificar se esta ou nao nos registos, retirar os dados ou adicionar
