@@ -114,7 +114,6 @@ public class Jogador implements Serializable
 		ArrayList<Jogador> registos = new ArrayList<Jogador>();
 		try 
 		{
-			File f = new File("db.tmp");	
 			FileInputStream fos = new FileInputStream("db.tmp");
 			ObjectInputStream oos = new ObjectInputStream(fos);
 			registos=(ArrayList) oos.readObject();
@@ -123,34 +122,33 @@ public class Jogador implements Serializable
 		} 
 		catch (Exception e) 
 		{
-			//create new file
-			/*	     
-			f.createNewFile();   
-			FileInputStream fos = new FileInputStream("db.tmp");
-			ObjectInputStream oos = new ObjectInputStream(fos);
-			registos=(ArrayList) oos.readObject();
-			oos.close();*/
-			System.out.println("erro");		
+			System.out.println("Nao ha registos.");		
 			return registos;
-		}
-		
+		}	
 	}
 	
+	public static void write(ArrayList<Jogador> registos) throws Exception
+	{
+		try 
+		{
+			FileOutputStream fos2 = new FileOutputStream("db.tmp");
+			ObjectOutputStream oos2 = new ObjectOutputStream(fos2);
+			oos2.writeObject(registos);
+			oos2.close();
+		} 
+		catch (Exception e) 
+		{
+			throw e;		
+		}	
+	}
+
 	
-	
-	public static void main(String[] arg) throws FileNotFoundException, IOException, ClassNotFoundException{
+	public static void main(String[] arg) throws Exception{
 		//leitura e escrita dos registos 
 		//esta parte de leitura e escrita no ficheiro nao me esta a funcionar, depois pergunto
 		//try catch para criação do ficheiro, podemos nao ter ja o ficheiro criado
 		
 		ArrayList<Jogador> testecoiso = Jogador.read();
-		
-		
-		
-		/*FileInputStream fos = new FileInputStream("db.tmp");
-		ObjectInputStream oos = new ObjectInputStream(fos);
-		registos=(ArrayList) oos.readObject();
-		oos.close();*/
 
 		/*
 		Scanner sc = new Scanner(System.in);
