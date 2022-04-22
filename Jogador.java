@@ -109,16 +109,50 @@ public class Jogador implements Serializable
 		this.vitorias = vitorias;
 	}
 
+	public static ArrayList<Jogador> read()
+	{
+		ArrayList<Jogador> registos = new ArrayList<Jogador>();
+		try 
+		{
+			File f = new File("db.tmp");	
+			FileInputStream fos = new FileInputStream("db.tmp");
+			ObjectInputStream oos = new ObjectInputStream(fos);
+			registos=(ArrayList) oos.readObject();
+			oos.close();
+			return registos;
+		} 
+		catch (Exception e) 
+		{
+			//create new file
+			/*	     
+			f.createNewFile();   
+			FileInputStream fos = new FileInputStream("db.tmp");
+			ObjectInputStream oos = new ObjectInputStream(fos);
+			registos=(ArrayList) oos.readObject();
+			oos.close();*/
+			System.out.println("erro");		
+			return registos;
+		}
+		
+	}
+	
+	
+	
 	public static void main(String[] arg) throws FileNotFoundException, IOException, ClassNotFoundException{
 		//leitura e escrita dos registos 
 		//esta parte de leitura e escrita no ficheiro nao me esta a funcionar, depois pergunto
-		//try catch para criação do ficheiro, podemos nao o ter ja criado
-		ArrayList<Jogador> registos = new ArrayList<Jogador>();
-		FileInputStream fos = new FileInputStream("db.tmp");
+		//try catch para criação do ficheiro, podemos nao ter ja o ficheiro criado
+		
+		ArrayList<Jogador> testecoiso = Jogador.read();
+		
+		
+		
+		/*FileInputStream fos = new FileInputStream("db.tmp");
 		ObjectInputStream oos = new ObjectInputStream(fos);
 		registos=(ArrayList) oos.readObject();
-		oos.close();
-		
+		oos.close();*/
+
+		/*
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Insira o seu email: ");
@@ -129,40 +163,45 @@ public class Jogador implements Serializable
 		String password = sc.nextLine();
 		sc.nextLine();
 		
+		String nome;
 		//verificar se o jogador esta nos registos
+		boolean estanosregistos;
 		for (Jogador i : registos)
 		{
 			if (i.getEmail().equals(email))
 			{
 				if (i.getPass().equals(password))
 				{
-					
+					//se existe nos registos vamos buscar
+					Jogador jogadorAtual = i;
+					estanosregistos = true;
 				}
 			}
+			else
+			{
+				System.out.println("Não está nos registos. \nQual é o seu nome? ");
+				nome = sc.nextLine();
+				sc.nextLine();
+				
+				Jogador jogadorAtual = new Jogador(email, password);
+				jogadorAtual.setNome(nome);
+				estanosregistos = false;
+				//adiciona-se aos registos aqui. nao o vou fazer ainda porque quero ver uma forma de guardar cada jogador com seu nome
+				
+			}
 		}
-		
-		Jogador dummy = new Jogador("bananas@gmail.com", "batatascozidas");
-		//verificar se esta ou nao nos registos, retirar os dados ou adicionar
-		if (registos.contains(dummy)){
-			dummy = registos.get(registos.indexOf(dummy));
-		}
-		else 
-		{
-			System.out.println("Qual é o seu nome? ");
-			nome = sc.nextLine();
-			sc.nextLine();
 			
-		}
+		
 		//comecamos o jogo ou retomamos o jogo ou qualquer coisa
 		//quer sair da sessao
 		//damos update aos coisos do jogador nome
-		registos.set(registos.indexOf(nome), nome);
+		//registos.set(registos.indexOf(nome), nome);
 		//depois damos load nos registos outra vez
 		
 		FileOutputStream fos2 = new FileOutputStream("db.tmp");
 		ObjectOutputStream oos2 = new ObjectOutputStream(fos2);
 		oos2.writeObject(registos);
-		oos2.close();
+		oos2.close();*/
 	}
 	
 }
