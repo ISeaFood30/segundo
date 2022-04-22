@@ -109,6 +109,8 @@ public class Jogador implements Serializable
 		this.vitorias = vitorias;
 	}
 
+	//estas funcoes read e write nao devem ficar na classe do Jogador
+	//pode nao ser preciso os regitos e passa a ser uma void function sem returns
 	public static ArrayList<Jogador> read()
 	{
 		ArrayList<Jogador> registos = new ArrayList<Jogador>();
@@ -127,7 +129,7 @@ public class Jogador implements Serializable
 		}	
 	}
 	
-	public static void write(ArrayList<Jogador> registos) throws Exception
+	public static void write(ArrayList<Jogador> registos)
 	{
 		try 
 		{
@@ -138,7 +140,7 @@ public class Jogador implements Serializable
 		} 
 		catch (Exception e) 
 		{
-			throw e;		
+			System.out.println("Ocorreu um erro. Nao foi possivel gravar.");	
 		}	
 	}
 
