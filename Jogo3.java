@@ -87,32 +87,28 @@ public class Jogo3
 	
 	public void moverCartasT(String origem, String destino, int n_cartas)
 	{
+		try
+		{
 			Scanner sc = new Scanner(System.in);
 			if (origem.equals("Baralho"))   // mover do baralho para uma pilha de transição
 			{
-				try 
-				{
-					int id_destinoA = Character.getNumericValue(destino.charAt(destino.length()-1)) - 1;
-					Carta cartaA = this.baralho[1].getPilha().get(this.baralho[1].Size()-1);
+				int id_destinoA = Character.getNumericValue(destino.charAt(destino.length()-1)) - 1;
+				Carta cartaA = this.baralho[1].getPilha().get(this.baralho[1].Size()-1);
 					
-					if (this.pilhasT[id_destinoA].Size() == 0 && cartaA.getRep().equals("K")) // o Às tem de ser a primeira nestas pilhas de armazenamento
-					{
-						this.pilhasT[id_destinoA].addCarta(cartaA);
-						this.baralho[1].removeCarta(cartaA);
-					}
-					else if (this.pilhasT[id_destinoA].Size() > 0 && cartaA.getCor().equals(this.pilhasT[id_destinoA].getPilha().get(this.pilhasT[id_destinoA].Size() - 1).getCor()) == false
-							&& this.pilhasT[id_destinoA].getPilha().get(this.pilhasT[id_destinoA].Size() - 1).getValor() - cartaA.getValor() == 1)
-					{
-						this.pilhasT[id_destinoA].addCarta(cartaA);
-						this.baralho[1].removeCarta(cartaA);
-					}
-					else
-					{
-						System.out.println("Essa operação não é permitida. Tente outra vez.");
-					}
+				if (this.pilhasT[id_destinoA].Size() == 0 && cartaA.getRep().equals("K")) // o Às tem de ser a primeira nestas pilhas de armazenamento
+				{
+					this.pilhasT[id_destinoA].addCarta(cartaA);
+					this.baralho[1].removeCarta(cartaA);
 				}
-				catch (Exception e) {
-					System.out.println("Verifique o que escreveu e tente outra vez.");
+				else if (this.pilhasT[id_destinoA].Size() > 0 && cartaA.getCor().equals(this.pilhasT[id_destinoA].getPilha().get(this.pilhasT[id_destinoA].Size() - 1).getCor()) == false
+						&& this.pilhasT[id_destinoA].getPilha().get(this.pilhasT[id_destinoA].Size() - 1).getValor() - cartaA.getValor() == 1)
+				{
+					this.pilhasT[id_destinoA].addCarta(cartaA);
+					this.baralho[1].removeCarta(cartaA);
+				}
+				else
+				{
+					System.out.println("Essa operação não é permitida. Tente outra vez.");
 				}
 			}
 			
@@ -157,69 +153,72 @@ public class Jogo3
 					System.out.println("Essa operação não é permitida. Tente outra vez.");
 				}
 			}
+		}
+		catch (Exception e) 
+		{
+			System.out.println("Verifique o que escreveu. Tente outra vez");
+		}
 	}
-	
 	
 	
 	public void moverCartasA(String origemT, String destinoA)   // mover cartas desde baralho ou transição para o armazenamento
 	{
-	
-		if (origemT.equals("Baralho"))   // mover do baralho para o armazenamento
+		try 
+		{
+			if (origemT.equals("Baralho"))   // mover do baralho para o armazenamento
 			{
-			int id_destinoA = Character.getNumericValue(destinoA.charAt(destinoA.length()-1)) - 1;
-			Carta cartaA = this.baralho[1].getPilha().get(this.baralho[1].Size()-1);
-			if (this.pilhasA[id_destinoA].Size() == 0 && cartaA.getRep().equals("A")) // o Às tem de ser a primeira nestas pilhas de
-			// armazenamento
+				int id_destinoA = Character.getNumericValue(destinoA.charAt(destinoA.length()-1)) - 1;
+				Carta cartaA = this.baralho[1].getPilha().get(this.baralho[1].Size()-1);
+				if (this.pilhasA[id_destinoA].Size() == 0 && cartaA.getRep().equals("A")) // o Às tem de ser a primeira nestas pilhas de armazenamento
 				{
-				this.pilhasA[id_destinoA].addCarta(cartaA);
-				this.baralho[1].removeCarta(cartaA);
+					this.pilhasA[id_destinoA].addCarta(cartaA);
+					this.baralho[1].removeCarta(cartaA);
 				}
-			else if (this.pilhasA[id_destinoA].Size() > 0 && cartaA.getNaipe().equals(this.pilhasA[id_destinoA].getPilha().get(this.pilhasA[id_destinoA].Size() - 1).getNaipe())
-					&& cartaA.getValor() - this.pilhasA[id_destinoA].getPilha().get(this.pilhasA[id_destinoA].Size() - 1).getValor() == 1)
+				else if (this.pilhasA[id_destinoA].Size() > 0 && cartaA.getNaipe().equals(this.pilhasA[id_destinoA].getPilha().get(this.pilhasA[id_destinoA].Size() - 1).getNaipe())
+						&& cartaA.getValor() - this.pilhasA[id_destinoA].getPilha().get(this.pilhasA[id_destinoA].Size() - 1).getValor() == 1)
 				{
-				this.pilhasA[id_destinoA].addCarta(cartaA);
-				this.baralho[1].removeCarta(cartaA);
+					this.pilhasA[id_destinoA].addCarta(cartaA);
+					this.baralho[1].removeCarta(cartaA);
 				}
-			else
+				else
 				{
 				System.out.println("Essa operação não é permitida. Tente outra vez.");
 				}
 			}
-		else 
-		{	
-			int id_origemT = Character.getNumericValue(origemT.charAt(origemT.length()-1)) - 1;
-			int id_destinoA = Character.getNumericValue(destinoA.charAt(destinoA.length()-1)) - 1;
-			Carta carta = this.pilhasT[id_origemT].getPilha().get(this.pilhasT[id_origemT].Size()-1);
-			if (this.pilhasA[id_destinoA].Size() == 0 && carta.getRep().equals("A")) // o Às tem de ser a primeira nestas pilhas de
-																	// armazenamento
-			{
-				this.pilhasA[id_destinoA].addCarta(carta);
-				this.pilhasT[id_origemT].removeCarta(carta);
-				if (this.pilhasT[id_origemT].Size() != 0)
+			else 
+			{	
+				int id_origemT = Character.getNumericValue(origemT.charAt(origemT.length()-1)) - 1;
+				int id_destinoA = Character.getNumericValue(destinoA.charAt(destinoA.length()-1)) - 1;
+				Carta carta = this.pilhasT[id_origemT].getPilha().get(this.pilhasT[id_origemT].Size()-1);
+				if (this.pilhasA[id_destinoA].Size() == 0 && carta.getRep().equals("A")) // o Às tem de ser a primeira nestas pilhas de armazenamento
+				{
+					this.pilhasA[id_destinoA].addCarta(carta);
+					this.pilhasT[id_origemT].removeCarta(carta);
+					if (this.pilhasT[id_origemT].Size() != 0)
+						{
+							this.pilhasT[id_origemT].getPilha().get(this.pilhasT[id_origemT].Size()-1).setVisible(true);
+						}
+				}
+				else if (this.pilhasA[id_destinoA].Size() > 0 && carta.getNaipe().equals(this.pilhasA[id_destinoA].getPilha().get(this.pilhasA[id_destinoA].Size() - 1).getNaipe())
+						&& carta.getValor() - this.pilhasA[id_destinoA].getPilha().get(this.pilhasA[id_destinoA].Size() - 1).getValor() == 1)
+				{
+					this.pilhasA[id_destinoA].addCarta(carta);
+					this.pilhasT[id_origemT].removeCarta(carta);
+					if (this.pilhasT[id_origemT].Size() != 0)
 					{
 						this.pilhasT[id_origemT].getPilha().get(this.pilhasT[id_origemT].Size()-1).setVisible(true);
 					}
-			}
-			else if (this.pilhasA[id_destinoA].Size() > 0 && carta.getNaipe().equals(this.pilhasA[id_destinoA].getPilha().get(this.pilhasA[id_destinoA].Size() - 1).getNaipe())
-					&& carta.getValor() - this.pilhasA[id_destinoA].getPilha().get(this.pilhasA[id_destinoA].Size() - 1).getValor() == 1)
-			{
-				this.pilhasA[id_destinoA].addCarta(carta);
-				this.pilhasT[id_origemT].removeCarta(carta);
-				if (this.pilhasT[id_origemT].Size() != 0)
-				{
-					this.pilhasT[id_origemT].getPilha().get(this.pilhasT[id_origemT].Size()-1).setVisible(true);
 				}
-			}
-			else
-			{
-				System.out.println("Essa operação não é permitida. Tente outra vez.");
-			}
+				else
+				{
+					System.out.println("Essa operação não é permitida. Tente outra vez.");
+				}
+			}	
 		}
-		
-		
-		return;
-		
-		
+		catch (Exception e) 
+		{
+			System.out.println("Verifique o que escreveu. Tente outra vez");
+		}
 	}
 	
 
@@ -233,9 +232,41 @@ public class Jogo3
 			this.baralho[1] = new Pilha(); //fica vazia
 		}
 	}
+	//prototipo de guardar o jogo do jogador no ficheiro
+	//tanto no load como save ainda faltam algumas coisas que podem ser uteis e importante gravar
+	public void saveJogo(Jogador jogadorAtual, ArrayList<Jogador> registos, boolean estanosresgistos) 
+	{
+		jogadorAtual.setArmazenamento(this.pilhasA);
+		jogadorAtual.setTransicao(this.pilhasT);
+		jogadorAtual.setBaralho(this.baralho);
+		
+		if (estanosresgistos)
+		{
+			for (Jogador i : registos)
+			{
+				if (i.getEmail().equals(jogadorAtual.email))
+				{
+					if (i.getPass().equals(jogadorAtual.pass))
+					{
+						registos.set(registos.indexOf(i), jogadorAtual);
+					}
+				}
+			}
+		}
+		else {
+			registos.add(jogadorAtual);
+		}
+		Jogador.write(registos);	
+	}
 	
-	
-	//vamos precisar eventualmente de um jogo.load() e um jogo.save()
+	//prototipo de dar load do jogo em relacao ao jogador que esta nos registos
+	public void loadJogo(Jogador jogadorAtual) 
+	{
+		this.setBaralho(jogadorAtual.baralho);
+		this.setPilhasA(jogadorAtual.armazenamento);
+		this.setPilhasT(jogadorAtual.transicao);
+		this.representJogo(); //pode estar aqui nesta funcao ou fora no codigo principal do jogo
+	}
 
 	public void representJogo()
 	{
@@ -396,5 +427,4 @@ public class Jogo3
 		this.pilhasA = pilhasA;
 	}
 
-	
 }

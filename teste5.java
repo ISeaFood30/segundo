@@ -57,6 +57,7 @@ public class teste5
 							{
 								System.out.println("Quantas cartas quer mover?");
 								quantas_cartas = sc.nextInt();
+								sc.nextLine();
 							}
 					
 					jogo.moverCartasT(origem, destino, quantas_cartas);

@@ -11,14 +11,25 @@ public class Jogador implements Serializable
 	protected Pilha[] armazenamento = new Pilha[4];
 	protected Pilha[] transicao = new Pilha[7];
 	protected Pilha[] baralho = new Pilha[2]; 
-	protected double jogadas;
+	protected double contajogadas;
 	protected ArrayList<Integer> vitorias;
 
+	public Jogador()
+	{
+		
+	}
+	
 	public Jogador(String email, String pass)
 	{
 		this.pass = pass;
 		this.email = email;
-
+	}
+	
+	public Jogador(String email, String pass, String nome)
+	{
+		this.pass = pass;
+		this.email = email;
+		this.nome = nome;
 	}
 
 	public boolean SameJogador(Jogador outrojogador)
@@ -89,14 +100,14 @@ public class Jogador implements Serializable
 		this.baralho = baralho;
 	}
 
-	public double getJogadas()
+	public double getContajogadas()
 	{
-		return jogadas;
+		return contajogadas;
 	}
 
-	public void setJogadas(double jogadas)
+	public void setContajogadas(double contajogadas)
 	{
-		this.jogadas = jogadas;
+		this.contajogadas = contajogadas;
 	}
 
 	public ArrayList<Integer> getVitorias()
@@ -133,11 +144,14 @@ public class Jogador implements Serializable
 	{
 		try 
 		{
-			FileOutputStream fos2 = new FileOutputStream("db.tmp");
-			ObjectOutputStream oos2 = new ObjectOutputStream(fos2);
-			oos2.writeObject(registos);
-			oos2.close();
-		} 
+			FileOutputStream fos = new FileOutputStream("db.tmp");
+			//System.out.println("1");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			//System.out.println("2");
+			oos.writeObject(registos);
+			System.out.println("3");
+			oos.close();
+		}
 		catch (Exception e) 
 		{
 			System.out.println("Ocorreu um erro. Nao foi possivel gravar.");	
