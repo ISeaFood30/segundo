@@ -1,8 +1,9 @@
 package segundo;
 
+import java.io.Serializable;
 import java.util.*;
 //ha aqui metodos que nao faz sentido darem return, depois temos de ver isto
-public class Pilha
+public class Pilha implements Serializable
 {
 	private ArrayList<Carta> pilha;
 

@@ -23,6 +23,8 @@ public class Jogador implements Serializable
 	{
 		this.pass = pass;
 		this.email = email;
+		this.contajogadas = 0;
+
 	}
 	
 	public Jogador(String email, String pass, String nome)
@@ -30,6 +32,7 @@ public class Jogador implements Serializable
 		this.pass = pass;
 		this.email = email;
 		this.nome = nome;
+		this.contajogadas = 0;
 	}
 
 	public boolean SameJogador(Jogador outrojogador)
@@ -149,12 +152,13 @@ public class Jogador implements Serializable
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			//System.out.println("2");
 			oos.writeObject(registos);
-			System.out.println("3");
+			//System.out.println("3");
 			oos.close();
 		}
 		catch (Exception e) 
 		{
-			System.out.println("Ocorreu um erro. Nao foi possivel gravar.");	
+			System.out.println("Ocorreu um erro. Nao foi possivel gravar.");
+			 e.printStackTrace(System.out);
 		}	
 	}
 

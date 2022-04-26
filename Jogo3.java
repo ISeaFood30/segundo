@@ -9,6 +9,7 @@ public class Jogo3
 	private Pilha[] baralho;
 	private Pilha[] pilhasT;
 	private Pilha[] pilhasA;
+	private int contajogadas;
 	
 	
 	public Jogo3() 
@@ -16,6 +17,7 @@ public class Jogo3
 		this.baralho = new Pilha[2]; //2 montes de visualizaçao para o baralho
 		this.pilhasT = new Pilha[7]; // o jogo tem 7 pilhas de transição
 		this.pilhasA = new Pilha[4]; // 4 pilhas de armazenamento
+		this.contajogadas = 0;
 
 	}	
 	

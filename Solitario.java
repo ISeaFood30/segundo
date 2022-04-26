@@ -21,7 +21,7 @@ public class Solitario
 		String nome;
 		
 		//Jogador de teste
-		registos.add(new Jogador("potato", "banana", "daniel"));
+		//registos.add(new Jogador("potato", "banana", "daniel"));
 				
 		//verificar se esta nos registos
 		boolean estanosregistos = false;
@@ -109,7 +109,7 @@ public class Solitario
 								sc.nextLine();
 							}
 					
-					jogo.moverCartasT(origem, destino, quantas_cartas);
+					jogo.moverCartasT(origem, destino, quantas_cartas);//quando da erro, ou seja vai para o catch no movercartasT, ele da represent na mesma,
 					jogo.representJogo();
 				}
 				
@@ -137,10 +137,7 @@ public class Solitario
 		
 		System.out.println("Aguarde enquanto o jogo guarda.");
 		jogo.saveJogo(jogadorAtual, registos, estanosregistos);
-		System.out.println("O jogo esta guardado.");
-		
-		
+		System.out.println("O jogo esta guardado.");		
 		sc.close();
-	}
-	
+	}	
 }

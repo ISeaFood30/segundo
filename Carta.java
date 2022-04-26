@@ -1,8 +1,9 @@
 package segundo;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Carta
+public class Carta implements Serializable
 {
 	private String naipe;
 	private int valor; // 1 até 13, 1 é o Ás(A), 13 é Rei(K), 12 é dama (Q), 11 é valete (J), 2 a 10 é normal
