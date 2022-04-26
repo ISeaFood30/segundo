@@ -59,7 +59,6 @@ public class Jogo3
 		{
 			this.pilhasA[j] = new Pilha();
 		}
-		this.contajogadas = 0;
 		
 	}
 	
@@ -69,6 +68,7 @@ public class Jogo3
 		System.out.println("P->Passar cartas | R->Rebobinar | M->Mover | T->Terminar Jogo");
 		
 		String jogada = scan.nextLine();
+
 		return jogada;
 
 	}
@@ -84,7 +84,6 @@ public class Jogo3
 		{
 			this.baralho[1].addCarta(this.baralho[0].getPilha().get(this.baralho[0].getPilha().size()-1));
 			this.baralho[0].removeCarta(this.baralho[0].getPilha().get(this.baralho[0].getPilha().size()-1));
-			this.contajogadas += 1;
 		}
 	}
 	
@@ -92,26 +91,22 @@ public class Jogo3
 	{
 		try
 		{
+			Scanner sc = new Scanner(System.in);
 			if (origem.equals("Baralho"))   // mover do baralho para uma pilha de transição
 			{
 				int id_destinoA = Character.getNumericValue(destino.charAt(destino.length()-1)) - 1;
 				Carta cartaA = this.baralho[1].getPilha().get(this.baralho[1].Size()-1);
-				System.out.println(cartaA);
-				System.out.println(cartaA.getValor());
-				System.out.println(this.pilhasT[id_destinoA].getPilha().get(this.pilhasT[id_destinoA].Size() - 1).getCor());
 					
-				if (this.pilhasT[id_destinoA].Size() == 0 && cartaA.getRep().equals("K")) 
+				if (this.pilhasT[id_destinoA].Size() == 0 && cartaA.getRep().equals("K")) // o Às tem de ser a primeira nestas pilhas de armazenamento
 				{
 					this.pilhasT[id_destinoA].addCarta(cartaA);
 					this.baralho[1].removeCarta(cartaA);
-					this.contajogadas += 1;
 				}
 				else if (this.pilhasT[id_destinoA].Size() > 0 && cartaA.getCor().equals(this.pilhasT[id_destinoA].getPilha().get(this.pilhasT[id_destinoA].Size() - 1).getCor()) == false
 						&& this.pilhasT[id_destinoA].getPilha().get(this.pilhasT[id_destinoA].Size() - 1).getValor() - cartaA.getValor() == 1)
 				{
 					this.pilhasT[id_destinoA].addCarta(cartaA);
 					this.baralho[1].removeCarta(cartaA);
-					this.contajogadas += 1;
 				}
 				else
 				{
@@ -139,7 +134,6 @@ public class Jogo3
 					{
 						this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size()-1).setVisible(true);
 					}
-					this.contajogadas += 1;
 				}
 				
 				else if (this.pilhasT[id_destino].Size() > 0 && carta.getCor().equals(this.pilhasT[id_destino].getPilha().get(this.pilhasT[id_destino].Size() - 1).getCor()) == false
@@ -155,7 +149,6 @@ public class Jogo3
 					{
 						this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size()-1).setVisible(true);
 					}
-					this.contajogadas += 1;
 				}
 				else
 				{
@@ -165,7 +158,6 @@ public class Jogo3
 		}
 		catch (Exception e) 
 		{
-			e.printStackTrace(System.out);
 			System.out.println("Verifique o que escreveu. Tente outra vez");
 		}
 	}
@@ -183,14 +175,12 @@ public class Jogo3
 				{
 					this.pilhasA[id_destinoA].addCarta(cartaA);
 					this.baralho[1].removeCarta(cartaA);
-					this.contajogadas += 1;
 				}
 				else if (this.pilhasA[id_destinoA].Size() > 0 && cartaA.getNaipe().equals(this.pilhasA[id_destinoA].getPilha().get(this.pilhasA[id_destinoA].Size() - 1).getNaipe())
 						&& cartaA.getValor() - this.pilhasA[id_destinoA].getPilha().get(this.pilhasA[id_destinoA].Size() - 1).getValor() == 1)
 				{
 					this.pilhasA[id_destinoA].addCarta(cartaA);
 					this.baralho[1].removeCarta(cartaA);
-					this.contajogadas += 1;
 				}
 				else
 				{
@@ -210,7 +200,6 @@ public class Jogo3
 						{
 							this.pilhasT[id_origemT].getPilha().get(this.pilhasT[id_origemT].Size()-1).setVisible(true);
 						}
-					this.contajogadas += 1;
 				}
 				else if (this.pilhasA[id_destinoA].Size() > 0 && carta.getNaipe().equals(this.pilhasA[id_destinoA].getPilha().get(this.pilhasA[id_destinoA].Size() - 1).getNaipe())
 						&& carta.getValor() - this.pilhasA[id_destinoA].getPilha().get(this.pilhasA[id_destinoA].Size() - 1).getValor() == 1)
@@ -221,7 +210,6 @@ public class Jogo3
 					{
 						this.pilhasT[id_origemT].getPilha().get(this.pilhasT[id_origemT].Size()-1).setVisible(true);
 					}
-					this.contajogadas += 1;
 				}
 				else
 				{
@@ -232,7 +220,7 @@ public class Jogo3
 		catch (Exception e) 
 		{
 			System.out.println("Verifique o que escreveu. Tente outra vez");
-		}		
+		}
 	}
 	
 
@@ -244,11 +232,6 @@ public class Jogo3
 			this.baralho[1].Baralhar();
 			this.baralho[0] = this.baralho[1];//depois de baralhar as cartas passa tudo para a pilha da esquerda
 			this.baralho[1] = new Pilha(); //fica vazia
-			this.contajogadas += 1;
-		}
-		else 
-		{
-			System.out.println("Nao pode rebobinar agora.");
 		}
 	}
 	//prototipo de guardar o jogo do jogador no ficheiro
@@ -258,7 +241,6 @@ public class Jogo3
 		jogadorAtual.setArmazenamento(this.pilhasA);
 		jogadorAtual.setTransicao(this.pilhasT);
 		jogadorAtual.setBaralho(this.baralho);
-		jogadorAtual.setContajogadas(this.contajogadas);
 		
 		if (estanosresgistos)
 		{
@@ -285,7 +267,6 @@ public class Jogo3
 		this.setBaralho(jogadorAtual.baralho);
 		this.setPilhasA(jogadorAtual.armazenamento);
 		this.setPilhasT(jogadorAtual.transicao);
-		this.setContajogadas(jogadorAtual.contajogadas);
 		this.representJogo(); //pode estar aqui nesta funcao ou fora no codigo principal do jogo
 	}
 
@@ -324,7 +305,7 @@ public class Jogo3
 
 		//representação dos baralhos		
 		//1o monte
-		//estamos a impor que este monte do baralho nao se consegue ver
+		//estamos a impor que este monte do baralho nao se consgue ver
 		if (this.baralho[0].Size() != 0)
 		{
 			ecra[1][0] = "----- ";
@@ -446,16 +427,6 @@ public class Jogo3
 	public void setPilhasA(Pilha[] pilhasA)
 	{
 		this.pilhasA = pilhasA;
-	}
-
-	public int getContajogadas()
-	{
-		return contajogadas;
-	}
-
-	public void setContajogadas(int contajogadas)
-	{
-		this.contajogadas = contajogadas;
 	}
 
 }

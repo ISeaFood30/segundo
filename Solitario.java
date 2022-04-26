@@ -19,6 +19,9 @@ public class Solitario
 		String password = sc.nextLine();
 		
 		String nome;
+		
+		//Jogador de teste
+		//registos.add(new Jogador("potato", "banana", "daniel"));
 				
 		//verificar se esta nos registos
 		boolean estanosregistos = false;
@@ -27,7 +30,7 @@ public class Solitario
 		{
 			for (Jogador i : registos)
 			{
-				if (i.getEmail().equals(email)) //e se so tiver o mesmo mail e pass difernete?? mais uma excecao //problema com null pointer exception
+				if (i.getEmail().equals(email))
 				{
 					if (i.getPass().equals(password))
 					{
@@ -106,6 +109,7 @@ public class Solitario
 								sc.nextLine();
 							}
 					
+					jogo.moverCartasT(origem, destino, quantas_cartas);//quando da erro, ou seja vai para o catch no movercartasT, ele da represent na mesma,
 					jogo.representJogo();
 				}
 				
@@ -113,7 +117,8 @@ public class Solitario
 				{
 					System.out.println("Por favor inserir corretamente as indicações.");
 					//colocar aqui um jogo.represent()??
-				}			
+				}
+				
 			}
 			
 			else if (jogada.equals("R"))
@@ -126,10 +131,11 @@ public class Solitario
 			{
 				System.out.println("Por favor inserir corretamente as indicações.");
 			}
-			System.out.println(jogo.getContajogadas());
+			
 		}
 		while (jogada.equals("T") == false);
-
+		
+		System.out.println("Aguarde enquanto o jogo guarda.");
 		jogo.saveJogo(jogadorAtual, registos, estanosregistos);
 		System.out.println("O jogo esta guardado.");		
 		sc.close();
