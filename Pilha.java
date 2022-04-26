@@ -89,13 +89,11 @@ public class Pilha implements Serializable
 		String[] representation = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
 		
 		ArrayList<Carta> cartas = new ArrayList<Carta>();
-		int counter = 0;
 		for(int x = 0; x < naipes.length; x++)
 		{
 			for (int y = 0; y < representation.length; y ++)
 			{
 				cartas.add(new Carta(representation[y], naipes[x]));		
-				counter ++;
 			}
 		}
 		this.pilha = cartas;

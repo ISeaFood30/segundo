@@ -11,7 +11,7 @@ public class Jogador implements Serializable
 	protected Pilha[] armazenamento = new Pilha[4];
 	protected Pilha[] transicao = new Pilha[7];
 	protected Pilha[] baralho = new Pilha[2]; 
-	protected double contajogadas;
+	protected int contajogadas;
 	protected ArrayList<Integer> vitorias;
 
 	public Jogador()
@@ -108,7 +108,7 @@ public class Jogador implements Serializable
 		return contajogadas;
 	}
 
-	public void setContajogadas(double contajogadas)
+	public void setContajogadas(int contajogadas)
 	{
 		this.contajogadas = contajogadas;
 	}
@@ -158,68 +158,7 @@ public class Jogador implements Serializable
 		catch (Exception e) 
 		{
 			System.out.println("Ocorreu um erro. Nao foi possivel gravar.");
-			 e.printStackTrace(System.out);
+			e.printStackTrace(System.out);
 		}	
-	}
-
-	
-	public static void main(String[] arg) throws Exception{
-		//leitura e escrita dos registos 
-		//esta parte de leitura e escrita no ficheiro nao me esta a funcionar, depois pergunto
-		//try catch para criação do ficheiro, podemos nao ter ja o ficheiro criado
-		
-		ArrayList<Jogador> testecoiso = Jogador.read();
-
-		/*
-		Scanner sc = new Scanner(System.in);
-		
-		System.out.println("Insira o seu email: ");
-		String email = sc.nextLine();
-		sc.nextLine();
-		
-		System.out.println("Insira a sua password: ");
-		String password = sc.nextLine();
-		sc.nextLine();
-		
-		String nome;
-		//verificar se o jogador esta nos registos
-		boolean estanosregistos;
-		for (Jogador i : registos)
-		{
-			if (i.getEmail().equals(email))
-			{
-				if (i.getPass().equals(password))
-				{
-					//se existe nos registos vamos buscar
-					Jogador jogadorAtual = i;
-					estanosregistos = true;
-				}
-			}
-			else
-			{
-				System.out.println("Não está nos registos. \nQual é o seu nome? ");
-				nome = sc.nextLine();
-				sc.nextLine();
-				
-				Jogador jogadorAtual = new Jogador(email, password);
-				jogadorAtual.setNome(nome);
-				estanosregistos = false;
-				//adiciona-se aos registos aqui. nao o vou fazer ainda porque quero ver uma forma de guardar cada jogador com seu nome
-				
-			}
-		}
-			
-		
-		//comecamos o jogo ou retomamos o jogo ou qualquer coisa
-		//quer sair da sessao
-		//damos update aos coisos do jogador nome
-		//registos.set(registos.indexOf(nome), nome);
-		//depois damos load nos registos outra vez
-		
-		FileOutputStream fos2 = new FileOutputStream("db.tmp");
-		ObjectOutputStream oos2 = new ObjectOutputStream(fos2);
-		oos2.writeObject(registos);
-		oos2.close();*/
-	}
-	
+	}	
 }
