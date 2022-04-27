@@ -52,55 +52,55 @@ public class Carta implements Serializable
 	public int getValor()
 	{
 		String rep = this.rep;
-		if (rep == "A")
+		if (rep.equals("A"))
 		{
 			this.valor = 1;
 		}
-		else if (rep == "K")
+		else if (rep.equals("K"))
 		{
 			this.valor = 13;
 		}
-		else if (rep == "Q")
+		else if (rep.equals("Q"))
 		{
 			this.valor = 12;
 		}
-		else if (rep == "J")
+		else if (rep.equals("J"))
 		{
 			this.valor = 11;
 		}
-		else if (rep == "2")
+		else if (rep.equals("2"))
 		{
 			this.valor = 2;
 		}
-		else if (rep == "3")
+		else if (rep.equals("3"))
 		{
 			this.valor = 3;
 		}
-		else if (rep == "4")
+		else if (rep.equals("4"))
 		{
 			this.valor = 4;
 		}
-		else if (rep == "5")
+		else if (rep.equals("5"))
 		{
 			this.valor = 5;
 		}
-		else if (rep == "6")
+		else if (rep.equals("6"))
 		{
 			this.valor = 6;
 		}
-		else if (rep == "7")
+		else if (rep.equals("7"))
 		{
 			this.valor = 7;
 		}
-		else if (rep == "8")
+		else if (rep.equals("8"))
 		{
 			this.valor = 8;
 		}
-		else if (rep == "9")
+		else if (rep.equals("9"))
 		{
 			this.valor = 9;
 		}
-		else if (rep == "10")
+		else if (rep.equals("10"))
 		{
 			this.valor = 10;
 		}
@@ -114,12 +114,11 @@ public class Carta implements Serializable
 
 	public String getCor()
 	{
-		String naipe = this.naipe;
-		if (naipe == "E" || naipe == "P")
+		if (this.naipe.equals("E") || this.naipe.equals("P"))
 		{
 			this.cor = "Preto";
 		}
-		else if (naipe == "O" || naipe == "C")
+		else if (this.naipe.equals("O") || this.naipe.equals("C"))
 		{
 			this.cor = "Vermelho";
 		}
