@@ -1,7 +1,6 @@
 package segundo;
 
 import java.io.Serializable;
-import java.util.Random;
 
 public class Carta implements Serializable
 {
@@ -12,46 +11,11 @@ public class Carta implements Serializable
 	private boolean visible;
 	
 
-
-	public void setRep(String rep)
-	{
-		this.rep = rep;
-	}
-
 	public Carta(String rep, String naipe)
 	{
 		this.rep = rep;
 		this.naipe = naipe;
-	}
-
-	public Carta(int teste1, int teste2) // CONSTRUTOR QUE CRIA UMA CARTA ALEATÓRIA
-	{
-		String[] reps = { "A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2" };
-		String[] naipes = { "E", "P", "O", "C" };
-
-		// isto aqui depois tem de ser implementado no codigo do jogo, e não aqui
-		// Random random = new Random();
-		// int teste1 = random.nextInt(reps.length); // random entre 0 e reps.length(exclusive)
-		// int teste2 = random.nextInt(naipes.length);
-		// até aqui, fazer um random e depois ter esses teste1 e teste2 como argumento deste construtor
-
-		this.rep = reps[teste1];
-		this.naipe = naipes[teste2];
-	}
-
-	public String getNaipe()
-	{
-		return naipe;
-	}
-
-	public void setNaipe(String naipe)
-	{
-		this.naipe = naipe;
-	}
-
-	public int getValor()
-	{
-		String rep = this.rep;
+		
 		if (rep.equals("A"))
 		{
 			this.valor = 1;
@@ -104,7 +68,47 @@ public class Carta implements Serializable
 		{
 			this.valor = 10;
 		}
-		return this.valor;
+		
+		if (naipe.equals("E") || naipe.equals("P"))
+		{
+			this.cor = "Preto";
+		}
+		else
+		{
+			this.cor = "Vermelho";
+		}
+		
+		this.visible = false;
+	}
+
+	public Carta(int teste1, int teste2) // CONSTRUTOR QUE CRIA UMA CARTA ALEATÓRIA
+	{
+		String[] reps = { "A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2" };
+		String[] naipes = { "E", "P", "O", "C" };
+
+		// isto aqui depois tem de ser implementado no codigo do jogo, e não aqui
+		// Random random = new Random();
+		// int teste1 = random.nextInt(reps.length); // random entre 0 e reps.length(exclusive)
+		// int teste2 = random.nextInt(naipes.length);
+		// até aqui, fazer um random e depois ter esses teste1 e teste2 como argumento deste construtor
+
+		this.rep = reps[teste1];
+		this.naipe = naipes[teste2];
+	}
+
+	public String getNaipe()
+	{
+		return naipe;
+	}
+
+	public void setNaipe(String naipe)
+	{
+		this.naipe = naipe;
+	}
+
+	public int getValor()
+	{
+		return valor;
 	}
 
 	public void setValor(int valor)
@@ -114,15 +118,7 @@ public class Carta implements Serializable
 
 	public String getCor()
 	{
-		if (this.naipe.equals("E") || this.naipe.equals("P"))
-		{
-			this.cor = "Preto";
-		}
-		else if (this.naipe.equals("O") || this.naipe.equals("C"))
-		{
-			this.cor = "Vermelho";
-		}
-		return this.cor;
+		return cor;
 	}
 
 	public void setCor(String cor)
@@ -135,6 +131,12 @@ public class Carta implements Serializable
 		return rep;
 	}
 
+	public void setRep(String rep)
+	{
+		this.rep = rep;
+	}
+
+	
 	public boolean compararNaipe(Carta outraCarta)
 	{
 		boolean teste = false;

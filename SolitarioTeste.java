@@ -39,14 +39,15 @@ public class SolitarioTeste
 						estanosregistos = true;
 					}
 				}
-				else
-				{
-					System.out.println("Não está nos registos. \nQual é o seu nome? ");
-					nome = sc.nextLine();
+			}
+			
+			if(!estanosregistos)
+			{
+				System.out.println("Não está nos registos. \nQual é o seu nome? ");
+				nome = sc.nextLine();
 
-					jogadorAtual = new Jogador(email, password);
-					jogadorAtual.setNome(nome);
-				}
+				jogadorAtual = new Jogador(email, password);
+				jogadorAtual.setNome(nome);
 			}
 		}
 		else
@@ -151,7 +152,6 @@ public class SolitarioTeste
 		}
 		while (fim_jogo == false);
 
-		System.out.println("Aguarde enquanto o jogo guarda.");
 		jogo.saveJogo(jogadorAtual, registos, estanosregistos);
 		System.out.println("O jogo está guardado.");
 		sc.close();

@@ -304,6 +304,7 @@ public class Jogo4
 		jogadorAtual.setArmazenamento(this.pilhasA);
 		jogadorAtual.setTransicao(this.pilhasT);
 		jogadorAtual.setBaralho(this.baralho);
+		jogadorAtual.setContajogadas(this.contajogadas);
 
 		if (estanosresgistos)
 		{
@@ -331,7 +332,7 @@ public class Jogo4
 		this.setBaralho(jogadorAtual.baralho);
 		this.setPilhasA(jogadorAtual.armazenamento);
 		this.setPilhasT(jogadorAtual.transicao);
-		this.representJogo(); // pode estar aqui nesta funcao ou fora no codigo principal do jogo
+		this.setContajogadas(jogadorAtual.contajogadas);
 	}
 
 	public void representJogo()
@@ -518,6 +519,16 @@ public class Jogo4
 	public void setPilhasA(Pilha[] pilhasA)
 	{
 		this.pilhasA = pilhasA;
+	}
+
+	public int getContajogadas()
+	{
+		return contajogadas;
+	}
+
+	public void setContajogadas(int contajogadas)
+	{
+		this.contajogadas = contajogadas;
 	}
 
 }
