@@ -463,9 +463,10 @@ public class Jogo4
 
 	}
 
-	public boolean endJogo()
+	public boolean jogoWin()
 	{
 		boolean acabou_ou_nao = false;
+		int contador = 0;
 
 		for (int i = 0; i < 4; i++)
 		{
@@ -474,16 +475,17 @@ public class Jogo4
 				Carta ajudante = this.pilhasA[i].getPilha().get(this.pilhasA[i].Size() - 1);
 				if (ajudante.getRep().equals("K") == true)
 				{
-					acabou_ou_nao = true; // se as regras estiverem bem a ultima carta das pilhasA vai ser o rei e nao
+					contador = contador + 1;					//se regras estiverem bem a ultima carta das pilhasA vai ser o rei e nao
 											// havera mais nenhuma quando as 4 tiverem um rei na ultima
 				}
-				else
-				{
-					acabou_ou_nao = false;
-				}
+				
 			}
 		}
-		if (this.baralho[0].Size() != 0 || this.baralho[1].Size() != 0)
+		if (contador == 4)
+		{
+			acabou_ou_nao = true;
+		}
+		else if (this.baralho[0].Size() != 0 || this.baralho[1].Size() != 0)
 		{
 			acabou_ou_nao = false;
 		}

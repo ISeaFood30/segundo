@@ -87,7 +87,7 @@ public class SolitarioTeste
 			if (jogada.equals("P"))
 			{
 				jogo.passarCartas();
-				fim_jogo = jogo.endJogo();
+				fim_jogo = jogo.jogoWin();
 				jogo.representJogo();
 			}
 
@@ -103,7 +103,7 @@ public class SolitarioTeste
 				if (tipo_M.equals("Arm"))
 				{
 					jogo.moverCartasA(origem, destino);
-					fim_jogo = jogo.endJogo();
+					fim_jogo = jogo.jogoWin();
 					jogo.representJogo();
 				}
 				// ver esta coisa da Pil. se escrever PIL isto aceita tambem e nao estou a perceber porque
@@ -120,7 +120,7 @@ public class SolitarioTeste
 					// jogo.moverCartasT(origem, destino, quantas_cartas);//quando da erro, ou seja vai para o catch no
 					// movercartasT, ele da represent na mesma,
 					jogo.moverCartasT(origem, destino);
-					fim_jogo = jogo.endJogo();
+					fim_jogo = jogo.jogoWin();
 					jogo.representJogo();
 				}
 
@@ -136,12 +136,13 @@ public class SolitarioTeste
 			{
 				jogo.Rebobinar();
 				jogo.representJogo();
-				fim_jogo = jogo.endJogo();
+				fim_jogo = jogo.jogoWin();
 			}
 
 			else if (jogada.equals("T"))
 			{
 				fim_jogo = true;
+				System.out.println("VITÓRIA! GANHOU O JOGO!");
 			}
 
 			else
