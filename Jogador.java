@@ -13,8 +13,6 @@ public class Jogador implements Serializable
 	private Pilha[] baralho = new Pilha[2]; 
 	private int contajogadas;
 	private ArrayList<Integer> vitorias;
-	private boolean venceuultimojogo;
-	
 
 	public Jogador()
 	{
@@ -26,7 +24,6 @@ public class Jogador implements Serializable
 		this.pass = pass;
 		this.email = email;
 		this.contajogadas = 0;
-		this.venceuultimojogo = false;
 
 	}
 	
@@ -36,16 +33,16 @@ public class Jogador implements Serializable
 		this.email = email;
 		this.nome = nome;
 		this.contajogadas = 0;
-		this.venceuultimojogo = false;
 	}
-
+	//nao usamos esta funcao
+/*
 	public boolean SameJogador(Jogador outrojogador)
 	{
 		if (this.pass == outrojogador.pass && this.email == outrojogador.email)
 			return true;
 		else
 			return false;
-	}
+	}*/
 	
 	public String getNome()
 	{
@@ -127,18 +124,7 @@ public class Jogador implements Serializable
 		this.vitorias = vitorias;
 	}
 
-	public boolean isVenceuultimojogo()
-	{
-		return venceuultimojogo;
-	}
-
-	public void setVenceuultimojogo(boolean venceuultimojogo)
-	{
-		this.venceuultimojogo = venceuultimojogo;
-	}
-
-	//estas funcoes read e write nao devem ficar na classe do Jogador
-	//pode nao ser preciso os regitos e passa a ser uma void function sem returns
+	//estas funcoes read, write e media nao devem ficar na classe do Jogador
 	public static ArrayList<Jogador> read()
 	{
 		ArrayList<Jogador> registos = new ArrayList<Jogador>();
@@ -162,11 +148,8 @@ public class Jogador implements Serializable
 		try 
 		{
 			FileOutputStream fos = new FileOutputStream("db.tmp");
-			//System.out.println("1");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			//System.out.println("2");
 			oos.writeObject(registos);
-			//System.out.println("3");
 			oos.close();
 		}
 		catch (Exception e) 
@@ -176,14 +159,14 @@ public class Jogador implements Serializable
 		}	
 	}
 	
-	public static double average(ArrayList<Integer> vitorias)
+	public static double media(ArrayList<Integer> vitorias)
 	{
-		double sum = 0;	
-		for(int i:vitorias)
-		{
-			sum += i;
+		double sum = 0;
+		for (int value : vitorias) {
+		    sum += value;
 		}
-		double valor = sum/vitorias.size();
-		return valor;
+		double media  = sum/vitorias.size();
+		return media;
 	}
+		
 }

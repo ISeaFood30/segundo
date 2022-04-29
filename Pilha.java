@@ -2,37 +2,37 @@ package segundo;
 
 import java.io.Serializable;
 import java.util.*;
-//ha aqui metodos que nao faz sentido darem return, depois temos de ver isto
+
 public class Pilha implements Serializable
 {
 	private ArrayList<Carta> pilha;
 
-	public Pilha() // pilha de transição, desde a 1 à 7
+	public Pilha()
 	{
 		ArrayList<Carta> pilha = new ArrayList<Carta>();
 		this.pilha = pilha;
 	}
 	
-	public  ArrayList<Carta> addCarta(Carta carta)
+	public  ArrayList<Carta> addCarta(Carta carta) //usamos a funcao
 	{
 		this.pilha.add(carta);
 		return this.pilha;
 	}
 	
-	public ArrayList<Carta> addCP(Pilha pil_destino)
+	public ArrayList<Carta> addCP(Pilha pil_destino) //nao usamos
 	{
 		Carta carta = this.pilha.get(this.pilha.size()-1);
 		return pil_destino.addCarta(carta);
 	}
 
-	public  ArrayList<Carta> removeCarta(Carta carta)
+	public  ArrayList<Carta> removeCarta(Carta carta)//usamos
 	{
 		this.pilha.remove(carta);
 		return this.pilha;
 	}
 	
 	
-	public ArrayList<Carta> addArmazem(ArrayList<Carta> pilhaA, Carta carta)
+	public ArrayList<Carta> addArmazem(ArrayList<Carta> pilhaA, Carta carta) //nao usamos
 	{
 		this.pilha = pilhaA;
 		if (this.pilha.size() == 0 && carta.getRep() == "A") // o Às tem de ser a primeira nestas pilhas de

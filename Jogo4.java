@@ -65,6 +65,7 @@ public class Jogo4
 		System.out.println("P->Passar cartas | R->Rebobinar | M->Mover | T->Terminar Jogo");
 
 		String jogada = scan.nextLine();
+		jogada.toUpperCase();
 
 		return jogada;
 
@@ -88,127 +89,140 @@ public class Jogo4
 	{
 		try
 		{
-			Scanner sc = new Scanner(System.in);
-			if (origem.equals("Baralho")) // mover do baralho para uma pilha de transição
-			{
-				int id_destinoA = Character.getNumericValue(destino.charAt(destino.length() - 1)) - 1;
-				Carta cartaA = this.baralho[1].getPilha().get(this.baralho[1].Size() - 1);
+		Scanner sc = new Scanner(System.in);
+		if (origem.equals("BARALHO")) // mover do baralho para uma pilha de transição
+		{
+			int id_destinoA = Character.getNumericValue(destino.charAt(destino.length() - 1)) - 1;
+			Carta cartaA = this.baralho[1].getPilha().get(this.baralho[1].Size() - 1);
 
-				if (this.pilhasT[id_destinoA].Size() == 0 && cartaA.getRep().equals("K")) // o K tem de ser a primeira
-																							// nestas pilhas de
-																							// transição
-				{
-					this.pilhasT[id_destinoA].addCarta(cartaA);
-					this.baralho[1].removeCarta(cartaA);
-					this.contajogadas = this.contajogadas + 1;
-				}
-				else if (this.pilhasT[id_destinoA].Size() > 0
-						&& cartaA.getCor()
-								.equals(this.pilhasT[id_destinoA].getPilha().get(this.pilhasT[id_destinoA].Size() - 1)
-										.getCor()) == false
-						&& this.pilhasT[id_destinoA].getPilha().get(this.pilhasT[id_destinoA].Size() - 1).getValor()
-								- cartaA.getValor() == 1)
-				{
-					this.pilhasT[id_destinoA].addCarta(cartaA);
-					this.baralho[1].removeCarta(cartaA);
-					this.contajogadas = this.contajogadas + 1;
-				}
-				else
-				{
-					System.out.println("Essa operação não é permitida. Tente outra vez.");
-				}
+			if (this.pilhasT[id_destinoA].Size() == 0 && cartaA.getRep().equals("K")) // o K tem de ser a primeira
+																						// nestas pilhas de
+																						// transição
+			{
+				this.pilhasT[id_destinoA].addCarta(cartaA);
+				this.baralho[1].removeCarta(cartaA);
+				this.contajogadas = this.contajogadas + 1;
 			}
-
-			// até aqui está a funcionar
-			else // de pilha de transição para pilha de transição
+			else if (this.pilhasT[id_destinoA].Size() > 0
+					&& cartaA.getCor()
+							.equals(this.pilhasT[id_destinoA].getPilha().get(this.pilhasT[id_destinoA].Size() - 1)
+									.getCor()) == false
+					&& this.pilhasT[id_destinoA].getPilha().get(this.pilhasT[id_destinoA].Size() - 1).getValor()
+							- cartaA.getValor() == 1)
 			{
-				int id_origem = Character.getNumericValue(origem.charAt(origem.length() - 1)) - 1;
-				int id_destino = Character.getNumericValue(destino.charAt(destino.length() - 1)) - 1;
-
-				int n_cartas;
-				int indice_mover;
-				Carta carta;
-				Carta helper = this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - 2);
-				if (helper.isVisible() == false)
-				{
-					n_cartas = 1;
-					indice_mover = this.pilhasT[id_origem].Size() - 1;
-					carta = this.pilhasT[id_origem].getPilha().get(indice_mover);
-				}
-				else
-				{
-					System.out.println("Quantas cartas quer mover?");
-					n_cartas = sc.nextInt();
-					indice_mover = this.pilhasT[id_origem].Size() - n_cartas; // este é o indice da primeira carta
-																					// que
-																					// quero mover
-					carta = this.pilhasT[id_origem].getPilha().get(indice_mover); // para ver se a operação é possivel
-																					// ou não
-				}
-
-				while (carta.isVisible() == false)
-				{
-					System.out.println("Não pode mover tantas cartas.");
-					n_cartas = sc.nextInt();
-					indice_mover = this.pilhasT[id_origem].Size() - n_cartas; // este é o indice da primeira carta que
-																				// quero mover
-					carta = this.pilhasT[id_origem].getPilha().get(indice_mover); // para ver se a operação é possivel
-																					// ou não
-				}
-
-				if (this.pilhasT[id_destino].Size() == 0 && carta.getRep().equals("K")) // o rei tem de ser a primeira
-																						// nestas pilhas de transição
-				{
-					for (int j = n_cartas; j > 0; j--)
-					{
-						Carta carta_help = this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - j);
-						this.pilhasT[id_destino].addCarta(carta_help);
-						this.pilhasT[id_origem].removeCarta(carta_help);
-						this.contajogadas = this.contajogadas + 1;
-					}
-					if (this.pilhasT[id_origem].Size() != 0)
-					{
-						this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - 1).setVisible(true);
-					}
-				}
-
-				else if (this.pilhasT[id_destino].Size() > 0
-						&& carta.getCor()
-								.equals(this.pilhasT[id_destino].getPilha().get(this.pilhasT[id_destino].Size() - 1)
-										.getCor()) == false
-						&& this.pilhasT[id_destino].getPilha().get(this.pilhasT[id_destino].Size() - 1).getValor()
-								- carta.getValor() == 1)
-				{
-					for (int j = n_cartas; j > 0; j--)
-					{
-						Carta carta_help = this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - j);
-						this.pilhasT[id_destino].addCarta(carta_help);
-						this.pilhasT[id_origem].removeCarta(carta_help);
-						this.contajogadas = this.contajogadas + 1;
-					}
-					if (this.pilhasT[id_origem].Size() != 0)
-					{
-						this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - 1).setVisible(true);
-					}
-				}
-				else
-				{
-					System.out.println("Essa operação não é permitida. Tente outra vez.");
-				}
+				this.pilhasT[id_destinoA].addCarta(cartaA);
+				this.baralho[1].removeCarta(cartaA);
+				this.contajogadas = this.contajogadas + 1;
+			}
+			else
+			{
+				System.out.println("Essa operação não é permitida. Tente outra vez.");
 			}
 		}
-		catch (Exception e)
+
+		else // de pilha de transição para pilha de transição
 		{
-			System.out.println("Verifique o que escreveu. Tente outra vez");
+			int id_origem = Character.getNumericValue(origem.charAt(origem.length() - 1)) - 1;
+			//System.out.println("Pilha de origem:" + id_origem);
+			int id_destino = Character.getNumericValue(destino.charAt(destino.length() - 1)) - 1;
+			//System.out.println("Pilha de destino:" + id_destino);
+
+			int n_cartas;
+			int indice_mover;
+			Carta carta;
+			Carta helper; // serve para perceber se apenas uma das cartas na pilha é visivel ou nao, para depois se
+							// decidir se pode mover mais do que uma carta
+			if (this.pilhasT[id_origem].Size() > 1)
+			{
+				helper = this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - 2);
+			}
+			else 
+			{
+				helper = this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - 1);
+			}
+
+
+			if (helper.isVisible() == false || this.pilhasT[id_origem].Size() == 1)
+			{
+				n_cartas = 1;
+				indice_mover = this.pilhasT[id_origem].Size() - 1;
+				carta = this.pilhasT[id_origem].getPilha().get(indice_mover);
+			}
+			else
+			{
+				System.out.println("Quantas cartas quer mover?");
+				n_cartas = sc.nextInt();
+				sc.nextLine();
+				indice_mover = this.pilhasT[id_origem].Size() - n_cartas; // este é o indice da primeira carta
+																			// que
+																			// quero mover
+				carta = this.pilhasT[id_origem].getPilha().get(indice_mover); // para ver se a operação é possivel
+																				// ou não
+			}
+
+			while (carta.isVisible() == false)
+			{
+				System.out.println("Não pode mover tantas cartas.");
+				n_cartas = sc.nextInt();
+				indice_mover = this.pilhasT[id_origem].Size() - n_cartas; // este é o indice da primeira carta que
+																			// quero mover
+				carta = this.pilhasT[id_origem].getPilha().get(indice_mover); // para ver se a operação é possivel
+																				// ou não
+			}
+
+			if (this.pilhasT[id_destino].Size() == 0 && carta.getRep().equals("K")) // o rei tem de ser a primeira
+																					// nestas pilhas de transição
+			{
+				for (int j = n_cartas; j > 0; j--)
+				{
+					Carta carta_help = this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - j);
+					this.pilhasT[id_destino].addCarta(carta_help);
+					this.pilhasT[id_origem].removeCarta(carta_help);
+					this.contajogadas = this.contajogadas + 1;
+				}
+				if (this.pilhasT[id_origem].Size() != 0)
+				{
+					this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - 1).setVisible(true);
+				}
+			}
+
+			else if (this.pilhasT[id_destino].Size() > 0
+					&& carta.getCor()
+							.equals(this.pilhasT[id_destino].getPilha().get(this.pilhasT[id_destino].Size() - 1)
+									.getCor()) == false
+					&& this.pilhasT[id_destino].getPilha().get(this.pilhasT[id_destino].Size() - 1).getValor()
+							- carta.getValor() == 1)
+			{
+				for (int j = n_cartas; j > 0; j--)
+				{
+					Carta carta_help = this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - j);
+					this.pilhasT[id_destino].addCarta(carta_help);
+					this.pilhasT[id_origem].removeCarta(carta_help);
+					this.contajogadas = this.contajogadas + 1;
+				}
+				if (this.pilhasT[id_origem].Size() != 0)
+				{
+					this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - 1).setVisible(true);
+				}
+			}
+			else
+			{
+				System.out.println("Essa operação não é permitida. Tente outra vez.");
+			}
 		}
 	}
+	 catch (Exception e)
+	 {
+	 System.out.println("Verifique o que escreveu. Tente outra vez");
+	 }
+	 }
 
 	public void moverCartasA(String origemT, String destinoA) // mover cartas desde baralho ou transição para o
 																// armazenamento
 	{
 		try
 		{
-			if (origemT.equals("Baralho")) // mover do baralho para o armazenamento
+			if (origemT.equals("BARALHO")) // mover do baralho para o armazenamento
 			{
 				int id_destinoA = Character.getNumericValue(destinoA.charAt(destinoA.length() - 1)) - 1;
 				Carta cartaA = this.baralho[1].getPilha().get(this.baralho[1].Size() - 1);
@@ -280,7 +294,6 @@ public class Jogo4
 		}
 	}
 
-	// porque e que estamos a baralhar a pilha aqui?
 	public void Rebobinar() // REBOBINAR é a ação de voltar a juntar todas as cartas que sobram no baralho na pilha da
 							// esquerda do monte disp., e só se pode quando ja nao houver nada na da esquerda
 	{
@@ -297,7 +310,6 @@ public class Jogo4
 		}
 	}
 
-	// prototipo de guardar o jogo do jogador no ficheiro
 	// tanto no load como save ainda faltam algumas coisas que podem ser uteis e importante gravar
 	public void saveJogo(Jogador jogadorAtual, ArrayList<Jogador> registos, boolean estanosresgistos)
 	{
@@ -370,7 +382,7 @@ public class Jogo4
 
 		// representação dos baralhos
 		// 1o monte
-		// estamos a impor que este monte do baralho nao se consgue ver
+		// estamos a impor que este monte do baralho nao se consegue ver
 		if (this.baralho[0].Size() != 0)
 		{
 			ecra[1][0] = "----- ";
@@ -475,10 +487,10 @@ public class Jogo4
 				Carta ajudante = this.pilhasA[i].getPilha().get(this.pilhasA[i].Size() - 1);
 				if (ajudante.getRep().equals("K") == true)
 				{
-					contador = contador + 1;					//se regras estiverem bem a ultima carta das pilhasA vai ser o rei e nao
-											// havera mais nenhuma quando as 4 tiverem um rei na ultima
+					contador = contador + 1; // se regras estiverem bem a ultima carta das pilhasA vai ser o rei e nao
+					// havera mais nenhuma quando as 4 tiverem um rei na ultima
 				}
-				
+
 			}
 		}
 		if (contador == 4)

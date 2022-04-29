@@ -80,7 +80,7 @@ public class Carta implements Serializable
 		
 		this.visible = false;
 	}
-
+	/*
 	public Carta(int teste1, int teste2) // CONSTRUTOR QUE CRIA UMA CARTA ALEATÓRIA
 	{
 		String[] reps = { "A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2" };
@@ -94,7 +94,7 @@ public class Carta implements Serializable
 
 		this.rep = reps[teste1];
 		this.naipe = naipes[teste2];
-	}
+	}*/
 
 	public String getNaipe()
 	{
@@ -136,7 +136,7 @@ public class Carta implements Serializable
 		this.rep = rep;
 	}
 
-	
+	/*
 	public boolean compararNaipe(Carta outraCarta)
 	{
 		boolean teste = false;
@@ -165,8 +165,8 @@ public class Carta implements Serializable
 		return teste;
 	}
 
-	// compararNaipe() e compararCor() apenas compara se são iguais ou não, dando true ou false, respet.
-
+	// compararNaipe() e compararCor() apenas compara se são iguais ou não, dando true ou false, respet. */
+/*
 	public boolean menorValor(Carta outraCarta)
 	{
 		boolean teste = false;
@@ -179,7 +179,7 @@ public class Carta implements Serializable
 			teste = false;
 		}
 		return teste;
-	}
+	}*/
 	// menorValor dá true se a carta a analisar tiver menor valor do que a dada como argumento,
 	// e false no caso contrário
 
@@ -188,22 +188,17 @@ public class Carta implements Serializable
 		String s;
 		String s1 = "----- \n";
 		String s2 = null;
-		// System.out.println(s1);
 		if (this.rep != "10")
 		{
 			s2 = "| " + this.rep + " | \n";
-			// System.out.println(s2);
 		}
 		else if (this.rep == "10")
 		{
 			s2 = "| " + this.rep + "| \n";
-			// System.out.println(s2);
 		}
 
 		String s3 = "| " + this.naipe + " | \n";
-		// System.out.println(s3);
 		String s4 = "----- \n";
-		// System.out.println(s4);
 
 		s = s1 + s2 + s3 + s4;
 		return s;
@@ -213,15 +208,15 @@ public class Carta implements Serializable
 	{
 		String s;
 		String s1 = "----- \n";
-		// System.out.println(s1);
+
 
 		String s2 = "|   | \n";
-		// System.out.println(s2);
+
 
 		String s3 = "|   | \n";
-		// System.out.println(s3);
+
 		String s4 = "----- \n";
-		// System.out.println(s4);
+
 		s = s1 + s2 + s3 + s4;
 		return s;
 	}

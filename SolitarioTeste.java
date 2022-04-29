@@ -46,6 +46,29 @@ public class SolitarioTeste
 						// se existe nos registos vamos buscar
 						this.jogadorAtual = i;
 						this.estanosregistos = true;
+						
+						System.out.println("Seja bem vindo de volta, " + this.jogadorAtual.getNome() + ".");						
+						//mostrar media de jogadas por vitoria		
+						if (!this.jogadorAtual.getVitorias().isEmpty())
+						{
+							double media = Jogador.media(this.jogadorAtual.getVitorias());
+							System.out.println("A sua média de jogadas por vitória é " + media);
+						}
+						else
+						{
+							System.out.println("Não tem nenhuma vitória registada.");
+						}
+						
+						System.out.println("Deseja começar um novo jogo ('N') ou recarregar um jogo guardado? ('S'))");
+						String save = sc.nextLine();
+						if (save.equals("N"))
+						{
+							this.novo_jogo = true;
+						}
+						else if( save.equals("S"))
+						{
+							this.novo_jogo = false;
+						}
 					}
 				}
 			}
@@ -57,6 +80,7 @@ public class SolitarioTeste
 
 				this.jogadorAtual = new Jogador(email, password);
 				this.jogadorAtual.setNome(nome);
+				this.novo_jogo = true;
 			}
 		}
 		else
@@ -66,31 +90,27 @@ public class SolitarioTeste
 
 			this.jogadorAtual = new Jogador(email, password);
 			this.jogadorAtual.setNome(nome);
+			this.novo_jogo = true;
 		}
 
 	}
 
-	public void SolitarioTeste()
+	public void jogaSolitarioTeste()
 	{
-		
 		Scanner sc = new Scanner(System.in);
 		this.jogo = new Jogo4();
-
-		if (this.estanosregistos && this.novo_jogo == false)
+		
+		if (this.estanosregistos && this.novo_jogo == false)   // jogador ja registado, decide continuar um jogo guardado
 		{
-			System.out.println("Seja bem vindo de volta, " + jogadorAtual.getNome() + ".");
 			System.out.println("Vamos recarregar o seu ultimo jogo");
 			this.jogo.loadJogo(this.jogadorAtual);
-			// sem registos isto vai dar erro. para efeitos de teste e normal. no fim se for preciso mudamos e pomos um
-			// trycatch aqui
 		}
-		else if (this.estanosregistos && this.novo_jogo == true)
+		else if (this.estanosregistos && this.novo_jogo == true)  // jogador ja registado, decide começar um novo jogo
 		{
-			System.out.println("Seja bem vindo de volta, " + this.jogadorAtual.getNome() + ".");
 			System.out.println("Vamos comecar um novo jogo.");
 			this.jogo.start();
 		}
-		else if (this.estanosregistos == false)
+		else if (this.estanosregistos == false && this.novo_jogo == true)
 				{
 			System.out.println("Seja bem vindo, " + this.jogadorAtual.getNome() + ".");
 			System.out.println("Vamos comecar um novo jogo.");
@@ -109,7 +129,6 @@ public class SolitarioTeste
 			if (jogada.equals("P"))
 			{
 				this.jogo.passarCartas();
-				this.win = this.jogo.jogoWin();
 				this.jogo.representJogo();
 			}
 
@@ -117,39 +136,28 @@ public class SolitarioTeste
 			{
 				System.out.println("Qual a pilha de origem? (se quiser tirar do baralho, escrever 'Baralho')");
 				String origem = sc.nextLine();
+				origem.toUpperCase();
 
 				System.out.println("Qual a pilha de destino?");
 				String destino = sc.nextLine();
+				destino.toUpperCase();
 				String tipo_M = destino.substring(0, 3);
 
-				if (tipo_M.equals("Arm"))
+				if (tipo_M.equals("ARM"))
 				{
 					this.jogo.moverCartasA(origem, destino);
-					this.win = this.jogo.jogoWin();
 					this.jogo.representJogo();
 				}
-				// ver esta coisa da Pil. se escrever PIL isto aceita tambem e nao estou a perceber porque
-				else if (tipo_M.equals("Pil"))
+				
+				else if (tipo_M.equals("PIL"))
 				{
-					// int quantas_cartas = 1;
-					// if(origem.equals("Baralho") == false)
-					// {
-					// System.out.println("Quantas cartas quer mover?");
-					// quantas_cartas = sc.nextInt();
-					// sc.nextLine();
-					// }
-
-					// jogo.moverCartasT(origem, destino, quantas_cartas);//quando da erro, ou seja vai para o catch no
-					// movercartasT, ele da represent na mesma,
 					this.jogo.moverCartasT(origem, destino);
-					this.win = this.jogo.jogoWin();
 					this.jogo.representJogo();
 				}
 
 				else
 				{
 					System.out.println("Por favor inserir corretamente as indicações.");
-					// colocar aqui um jogo.represent()??
 				}
 
 			}
@@ -158,40 +166,39 @@ public class SolitarioTeste
 			{
 				this.jogo.Rebobinar();
 				this.jogo.representJogo();
-				this.win = this.jogo.jogoWin();
 			}
-
-			else if (this.win == true)
-			{
-				fim_jogo = true;
-				this.novo_jogo = false;
-
-			}
-
+			
 			else if (jogada.equals("T"))
 			{
 				fim_jogo = true;
-				System.out.println("Pretende guardar o seu progresso neste jogo para depois retomar? Sim ou Não");
+				System.out.println("Pretende guardar o seu progresso neste jogo para depois retomar? Yes ou No");
 				String save = sc.nextLine();
+				save.toUpperCase();
 				this.win = false;
 				this.saved = false;
-				if (save.equals("Sim"))
+				
+				if (save.equals("YES"))
 				{
 					this.jogo.saveJogo(this.jogadorAtual, this.registos, this.estanosregistos);
 					System.out.println("--> Jogo Guardado <--");
 					this.saved = true;
-				}
-				
+				}			
 			}
-
+			
 			else
 			{
 				System.out.println("Por favor inserir corretamente as indicações.");
 			}
-
+			
+			this.win = this.jogo.jogoWin();
+			
+			if (this.win == true)
+			{
+				fim_jogo = true;
+				this.novo_jogo = false;
+			}		
 		}
 		while (fim_jogo == false);
-		//sc.close();
 	}
 
 	public void jogarSolitario()
@@ -199,43 +206,45 @@ public class SolitarioTeste
 		Scanner scan = new Scanner(System.in);
 		String decision = "";
 		// o programa sai do jogo se for inserida a hipotese T ou o jogo for ganho
-
 		if (this.win == false) // se o jogo nao for ganho, devo ter a opçao de iniciar um novo jogo ou jogar com outro
 								// utilizador
 		{
-			if (this.saved = false)
-			{
-				{System.out.println(
+				System.out.println(
 						"Deseja recomeçar um novo ('N') jogo, jogar com outro utilizador ('L') ou terminar sessão ('E')?");
-				if(scan.hasNextLine()){
-					  decision = scan.nextLine();
-					}
+				
+				decision = scan.nextLine();	
+				decision.toUpperCase();
+				//System.out.println("A decisão é: " + decision);
 				if (decision.equals("N"))
 				{
 					this.novo_jogo = true;
-					SolitarioTeste();
+					this.terminar = false;
+					//SolitarioTeste();
 				}
 				else if (decision.equals("L"))
 				{
 					this.novo_jogo = false;
+					this.terminar = false;
 					Login();
-					SolitarioTeste();
+					//SolitarioTeste();
 				}
-				else if (decision.equals("E"))
+				else //decision.equals("E") ou qualquer outro input termina sessao
 				{
 					this.terminar = true;
+					this.novo_jogo = false;					
+					System.out.println("Obrigado por jogar Solitário");
 					System.out.println("--> Sessão terminada <--");
 				}
-			}
+
+			
 		}
 		else if (this.win == true)
 		{
 			System.out.println(" ### VITÓRIA! GANHOU O JOGO! ###");
+			System.out.println(" Neste jogo necessitou de " + this.jogo.getContajogadas() + " jogadas para ganhar.");
 			this.terminar = true;
+			this.novo_jogo = false;
 		}
-		}
-
-		//scan.close();
 	}
 
 	public boolean getTerminar()
@@ -245,11 +254,11 @@ public class SolitarioTeste
 
 	public static void main(String[] args)
 	{
-		SolitarioTeste game = new SolitarioTeste();
+		SolitarioTeste game = new SolitarioTeste(); //nao temos um construtor para isto
 		game.Login();
 		do
 		{
-			game.SolitarioTeste();
+			game.jogaSolitarioTeste();
 			game.jogarSolitario();
 
 		}
