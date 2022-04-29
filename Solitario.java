@@ -62,14 +62,14 @@ public class Solitario
 		
 		if (estanosregistos)
 		{
-			System.out.println("Seja bem vindo de volta, " + jogadorAtual.nome + ".");
+			System.out.println("Seja bem vindo de volta, " + jogadorAtual.getNome() + ".");
 			System.out.println("Vamos recarregar o seu ultimo jogo");	
 			jogo.loadJogo(jogadorAtual);
 			//sem registos isto vai dar erro. para efeitos de teste e normal. no fim se for preciso mudamos e pomos um trycatch aqui
 		}
 		else 
 		{
-			System.out.println("Seja bem vindo, " + jogadorAtual.nome + ".");
+			System.out.println("Seja bem vindo, " + jogadorAtual.getNome() + ".");
 			System.out.println("Vamos comecar um novo jogo.");
 			jogo.start();
 		}

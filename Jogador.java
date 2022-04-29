@@ -5,14 +5,16 @@ import java.io.*;
 
 public class Jogador implements Serializable
 {
-	protected String nome;
-	protected String pass;
-	protected String email;
-	protected Pilha[] armazenamento = new Pilha[4];
-	protected Pilha[] transicao = new Pilha[7];
-	protected Pilha[] baralho = new Pilha[2]; 
-	protected int contajogadas;
-	protected ArrayList<Integer> vitorias;
+	private String nome;
+	private String pass;
+	private String email;
+	private Pilha[] armazenamento = new Pilha[4];
+	private Pilha[] transicao = new Pilha[7];
+	private Pilha[] baralho = new Pilha[2]; 
+	private int contajogadas;
+	private ArrayList<Integer> vitorias;
+	private boolean venceuultimojogo;
+	
 
 	public Jogador()
 	{
@@ -24,6 +26,7 @@ public class Jogador implements Serializable
 		this.pass = pass;
 		this.email = email;
 		this.contajogadas = 0;
+		this.venceuultimojogo = false;
 
 	}
 	
@@ -33,6 +36,7 @@ public class Jogador implements Serializable
 		this.email = email;
 		this.nome = nome;
 		this.contajogadas = 0;
+		this.venceuultimojogo = false;
 	}
 
 	public boolean SameJogador(Jogador outrojogador)
@@ -103,7 +107,7 @@ public class Jogador implements Serializable
 		this.baralho = baralho;
 	}
 
-	public double getContajogadas()
+	public int getContajogadas()
 	{
 		return contajogadas;
 	}
@@ -121,6 +125,16 @@ public class Jogador implements Serializable
 	public void setVitorias(ArrayList<Integer> vitorias)
 	{
 		this.vitorias = vitorias;
+	}
+
+	public boolean isVenceuultimojogo()
+	{
+		return venceuultimojogo;
+	}
+
+	public void setVenceuultimojogo(boolean venceuultimojogo)
+	{
+		this.venceuultimojogo = venceuultimojogo;
 	}
 
 	//estas funcoes read e write nao devem ficar na classe do Jogador
@@ -160,5 +174,16 @@ public class Jogador implements Serializable
 			System.out.println("Ocorreu um erro. Nao foi possivel gravar.");
 			 e.printStackTrace(System.out);
 		}	
+	}
+	
+	public static double average(ArrayList<Integer> vitorias)
+	{
+		double sum = 0;	
+		for(int i:vitorias)
+		{
+			sum += i;
+		}
+		double valor = sum/vitorias.size();
+		return valor;
 	}
 }

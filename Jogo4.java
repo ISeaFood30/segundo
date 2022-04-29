@@ -310,9 +310,9 @@ public class Jogo4
 		{
 			for (Jogador i : registos)
 			{
-				if (i.getEmail().equals(jogadorAtual.email))
+				if (i.getEmail().equals(jogadorAtual.getEmail()))
 				{
-					if (i.getPass().equals(jogadorAtual.pass))
+					if (i.getPass().equals(jogadorAtual.getPass()))
 					{
 						registos.set(registos.indexOf(i), jogadorAtual);
 					}
@@ -329,10 +329,10 @@ public class Jogo4
 	// prototipo de dar load do jogo em relacao ao jogador que esta nos registos
 	public void loadJogo(Jogador jogadorAtual)
 	{
-		this.setBaralho(jogadorAtual.baralho);
-		this.setPilhasA(jogadorAtual.armazenamento);
-		this.setPilhasT(jogadorAtual.transicao);
-		this.setContajogadas(jogadorAtual.contajogadas);
+		this.setBaralho(jogadorAtual.getBaralho());
+		this.setPilhasA(jogadorAtual.getArmazenamento());
+		this.setPilhasT(jogadorAtual.getTransicao());
+		this.setContajogadas(jogadorAtual.getContajogadas());
 	}
 
 	public void representJogo()
