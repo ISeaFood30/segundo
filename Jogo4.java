@@ -56,6 +56,7 @@ public class Jogo4
 		{
 			this.pilhasA[j] = new Pilha();
 		}
+		this.contajogadas = 0;
 
 	}
 
@@ -65,7 +66,7 @@ public class Jogo4
 		System.out.println("P->Passar cartas | R->Rebobinar | M->Mover | T->Terminar Jogo");
 
 		String jogada = scan.nextLine();
-		jogada.toUpperCase();
+		jogada = jogada.toUpperCase();
 
 		return jogada;
 

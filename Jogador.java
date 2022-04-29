@@ -24,15 +24,17 @@ public class Jogador implements Serializable
 		this.pass = pass;
 		this.email = email;
 		this.contajogadas = 0;
+		this.vitorias = new ArrayList<Integer>();
 
 	}
-	
+	//este construtor foi usado apenas para teste
 	public Jogador(String email, String pass, String nome)
 	{
 		this.pass = pass;
 		this.email = email;
 		this.nome = nome;
 		this.contajogadas = 0;
+		this.vitorias = new ArrayList<Integer>();
 	}
 	//nao usamos esta funcao
 /*

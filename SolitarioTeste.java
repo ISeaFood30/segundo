@@ -61,6 +61,7 @@ public class SolitarioTeste
 						
 						System.out.println("Deseja começar um novo jogo ('N') ou recarregar um jogo guardado? ('S'))");
 						String save = sc.nextLine();
+						save  = save.toUpperCase();
 						if (save.equals("N"))
 						{
 							this.novo_jogo = true;
@@ -69,6 +70,7 @@ public class SolitarioTeste
 						{
 							this.novo_jogo = false;
 						}
+						//else??
 					}
 				}
 			}
@@ -136,12 +138,12 @@ public class SolitarioTeste
 			{
 				System.out.println("Qual a pilha de origem? (se quiser tirar do baralho, escrever 'Baralho')");
 				String origem = sc.nextLine();
-				origem.toUpperCase();
+				origem = origem.toUpperCase();
 
 				System.out.println("Qual a pilha de destino?");
 				String destino = sc.nextLine();
-				destino.toUpperCase();
-				String tipo_M = destino.substring(0, 3);
+				destino = destino.toUpperCase();
+				String tipo_M = destino.substring(0, 3); //erro aqui caso a string nao tenha 3 ou mais caracteres
 
 				if (tipo_M.equals("ARM"))
 				{
@@ -173,7 +175,7 @@ public class SolitarioTeste
 				fim_jogo = true;
 				System.out.println("Pretende guardar o seu progresso neste jogo para depois retomar? Yes ou No");
 				String save = sc.nextLine();
-				save.toUpperCase();
+				save = save.toUpperCase();
 				this.win = false;
 				this.saved = false;
 				
@@ -213,7 +215,7 @@ public class SolitarioTeste
 						"Deseja recomeçar um novo ('N') jogo, jogar com outro utilizador ('L') ou terminar sessão ('E')?");
 				
 				decision = scan.nextLine();	
-				decision.toUpperCase();
+				decision = decision.toUpperCase();
 				//System.out.println("A decisão é: " + decision);
 				if (decision.equals("N"))
 				{
@@ -242,6 +244,7 @@ public class SolitarioTeste
 		{
 			System.out.println(" ### VITÓRIA! GANHOU O JOGO! ###");
 			System.out.println(" Neste jogo necessitou de " + this.jogo.getContajogadas() + " jogadas para ganhar.");
+			this.jogadorAtual.getVitorias().add(this.jogo.getContajogadas());
 			this.terminar = true;
 			this.novo_jogo = false;
 		}
