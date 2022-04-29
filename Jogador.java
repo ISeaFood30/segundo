@@ -165,7 +165,7 @@ public class Jogador implements Serializable
 		for (int value : vitorias) {
 		    sum += value;
 		}
-		double media  = sum/vitorias.size();
+		double media  = sum/(vitorias.size()*1.0);
 		return media;
 	}
 		
