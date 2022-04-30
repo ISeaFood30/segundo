@@ -36,15 +36,6 @@ public class Jogador implements Serializable
 		this.contajogadas = 0;
 		this.vitorias = new ArrayList<Integer>();
 	}
-	//nao usamos esta funcao
-/*
-	public boolean SameJogador(Jogador outrojogador)
-	{
-		if (this.pass == outrojogador.pass && this.email == outrojogador.email)
-			return true;
-		else
-			return false;
-	}*/
 	
 	public String getNome()
 	{

@@ -13,46 +13,18 @@ public class Pilha implements Serializable
 		this.pilha = pilha;
 	}
 	
-	public  ArrayList<Carta> addCarta(Carta carta) //usamos a funcao
+	public  ArrayList<Carta> addCarta(Carta carta)
 	{
 		this.pilha.add(carta);
 		return this.pilha;
 	}
-	
-	public ArrayList<Carta> addCP(Pilha pil_destino) //nao usamos
-	{
-		Carta carta = this.pilha.get(this.pilha.size()-1);
-		return pil_destino.addCarta(carta);
-	}
 
-	public  ArrayList<Carta> removeCarta(Carta carta)//usamos
+	public  ArrayList<Carta> removeCarta(Carta carta)
 	{
 		this.pilha.remove(carta);
 		return this.pilha;
 	}
-	
-	
-	public ArrayList<Carta> addArmazem(ArrayList<Carta> pilhaA, Carta carta) //nao usamos
-	{
-		this.pilha = pilhaA;
-		if (this.pilha.size() == 0 && carta.getRep() == "A") // o Às tem de ser a primeira nestas pilhas de
-																// armazenamento
-		{
-			this.pilha.add(carta);
-		}
-		else if (this.pilha.size() > 0 && carta.getNaipe() == this.pilha.get(this.pilha.size() - 1).getNaipe()
-				&& carta.getValor() - this.pilha.get(this.pilha.size() - 1).getValor() == 1)
-		{
-			this.pilha.add(carta);
-		}
-		else
-		{
-			System.out.println("Essa operação não é permitida.");
-		}
-		return this.pilha;
-	}
-	
-	
+		
 	public void printPilha() // dá para fazer o printo na inicialização do jogo
 	{ // usado apenas para teste
 		for (int i = 0; i <= (this.pilha).size() - 1; i++)
@@ -66,7 +38,6 @@ public class Pilha implements Serializable
 	{
 		return this.pilha;
 	}
-	
 	
 	public void setPilha(ArrayList<Carta> pilha)
 	{
@@ -101,5 +72,4 @@ public class Pilha implements Serializable
 		this.pilha = cartas;
 		return this;
 	}
-
 }

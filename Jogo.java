@@ -3,14 +3,14 @@ package segundo;
 import java.util.*;
 
 //criei para nao mexer no jogo que estava a funcionar. e ja nao me lembro se podia mexer no jogo2 ou nao
-public class Jogo4
+public class Jogo
 {
 	private Pilha[] baralho;
 	private Pilha[] pilhasT;
 	private Pilha[] pilhasA;
 	private int contajogadas;
 
-	public Jogo4()
+	public Jogo()
 	{
 		this.baralho = new Pilha[2]; // 2 montes de visualizaçao para o baralho
 		this.pilhasT = new Pilha[7]; // o jogo tem 7 pilhas de transição
