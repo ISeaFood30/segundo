@@ -21,7 +21,7 @@ public class Solitario
 	public void Login()
 	{
 		System.out.println("Seja bem-vindo ao Solitário. Por favor inicie sessão.");
-		this.registos = Jogador.read(); // temos de por as funcoes no sitio certo depois
+		this.registos = Jogador.read(); 
 
 		Scanner sc = new Scanner(System.in);
 
@@ -109,7 +109,7 @@ public class Solitario
 
 	}
 
-	public void jogaSolitarioTeste()
+	public void jogaSolitario()
 	{
 		Scanner sc = new Scanner(System.in);
 		this.jogo = new Jogo();
@@ -280,7 +280,7 @@ public class Solitario
 		game.Login();
 		do
 		{
-			game.jogaSolitarioTeste();
+			game.jogaSolitario();
 			game.jogarSolitario();
 
 		}
