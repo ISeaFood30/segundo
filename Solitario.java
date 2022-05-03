@@ -1,7 +1,7 @@
 package segundo;
 
 import java.util.*;
-
+// Daniel Vieira uc:2019231996 e Sérgio Rodrigues uc:2019232338
 public class Solitario
 {
 	private boolean terminar;
@@ -15,13 +15,13 @@ public class Solitario
 
 	public Solitario()
 	{
-		
+
 	}
-	
+
 	public void Login()
 	{
 		System.out.println("Seja bem-vindo ao Solitário. Por favor inicie sessão.");
-		this.registos = Jogador.read(); 
+		this.registos = Jogador.read();
 
 		Scanner sc = new Scanner(System.in);
 
@@ -48,9 +48,9 @@ public class Solitario
 						// se existe nos registos vamos buscar
 						this.jogadorAtual = i;
 						this.estanosregistos = true;
-						
-						System.out.println("Seja bem vindo de volta, " + this.jogadorAtual.getNome() + ".");						
-						//mostrar media de jogadas por vitoria		
+
+						System.out.println("Seja bem vindo de volta, " + this.jogadorAtual.getNome() + ".");
+						// mostrar media de jogadas por vitoria
 						if (!this.jogadorAtual.getVitorias().isEmpty())
 						{
 							double media = Jogador.media(this.jogadorAtual.getVitorias());
@@ -60,15 +60,15 @@ public class Solitario
 						{
 							System.out.println("Não tem nenhuma vitória registada.");
 						}
-						
-						//verificar em teste
+
 						String save;
 						do
 						{
 
-							System.out.println("Deseja começar um novo jogo ('N') ou recarregar um jogo guardado? ('S'))");
+							System.out.println(
+									"Deseja começar um novo jogo ('N') ou recarregar um jogo guardado? ('S'))");
 							save = sc.nextLine();
-							save  = save.toUpperCase();
+							save = save.toUpperCase();
 							if (save.equals("N"))
 							{
 								this.novo_jogo = true;
@@ -82,7 +82,7 @@ public class Solitario
 								System.out.println("Por favor insira uma opção válida");
 							}
 						}
-						while(!save.equals("N") && !save.equals("S"));
+						while (!save.equals("N") && !save.equals("S"));
 					}
 				}
 			}
@@ -109,23 +109,23 @@ public class Solitario
 
 	}
 
-	public void jogaSolitario()
+	public void jogaSolitario() // criador do jogo
 	{
 		Scanner sc = new Scanner(System.in);
 		this.jogo = new Jogo();
-		
-		if (this.estanosregistos && this.novo_jogo == false)   // jogador ja registado, decide continuar um jogo guardado
+
+		if (this.estanosregistos && this.novo_jogo == false) // jogador ja registado, decide continuar um jogo guardado
 		{
 			System.out.println("Vamos recarregar o seu ultimo jogo");
 			this.jogo.loadJogo(this.jogadorAtual);
 		}
-		else if (this.estanosregistos && this.novo_jogo == true)  // jogador ja registado, decide começar um novo jogo
+		else if (this.estanosregistos && this.novo_jogo == true) // jogador ja registado, decide começar um novo jogo
 		{
 			System.out.println("Vamos comecar um novo jogo.");
 			this.jogo.start();
 		}
 		else if (this.estanosregistos == false && this.novo_jogo == true)
-				{
+		{
 			System.out.println("Seja bem vindo, " + this.jogadorAtual.getNome() + ".");
 			System.out.println("Vamos comecar um novo jogo.");
 			this.jogo.start();
@@ -136,7 +136,7 @@ public class Solitario
 		this.win = false;
 
 		String jogada;
-		do
+		do // pede jogadas até ganhar ou pedir para terminar
 		{
 			jogada = this.jogo.Jogada();
 
@@ -156,12 +156,15 @@ public class Solitario
 				String destino = sc.nextLine();
 				destino = destino.toUpperCase();
 				String tipo_M = "";
-				try {
+				String tipo_de_origem = "";
+				try
+				{
 					tipo_M = destino.substring(0, 3);
+					tipo_de_origem = origem.substring(0, 3);
 				}
 				catch (Exception e)
 				{
-					//mesmo que a de erro com o substring, ele continua o porgrama
+					// mesmo que a de erro com o substring, ele continua o programa
 				}
 
 				if (tipo_M.equals("ARM"))
@@ -169,10 +172,10 @@ public class Solitario
 					this.jogo.moverCartasA(origem, destino);
 					this.jogo.representJogo();
 				}
-				
+
 				else if (tipo_M.equals("PIL"))
 				{
-					this.jogo.moverCartasT(origem, destino);
+					this.jogo.moverCartasT(origem, tipo_de_origem, destino);
 					this.jogo.representJogo();
 				}
 
@@ -188,7 +191,7 @@ public class Solitario
 				this.jogo.Rebobinar();
 				this.jogo.representJogo();
 			}
-			
+
 			else if (jogada.equals("T"))
 			{
 				fim_jogo = true;
@@ -197,32 +200,32 @@ public class Solitario
 				save = save.toUpperCase();
 				this.win = false;
 				this.saved = false;
-				
+
 				if (save.equals("YES"))
 				{
 					this.jogo.saveJogo(this.jogadorAtual, this.registos, this.estanosregistos);
 					System.out.println("--> Jogo Guardado <--");
 					this.saved = true;
-				}			
+				}
 			}
-			
+
 			else
 			{
 				System.out.println("Por favor inserir corretamente as indicações.");
 			}
-			
+
 			this.win = this.jogo.jogoWin();
-			
+
 			if (this.win == true)
 			{
 				fim_jogo = true;
 				this.novo_jogo = false;
-			}		
+			}
 		}
 		while (fim_jogo == false);
 	}
 
-	public void jogarSolitario()
+	public void jogarSolitario() // para o programa saber o que fazer quando se pede para terminar ou quando ganha
 	{
 		Scanner scan = new Scanner(System.in);
 		String decision = "";
@@ -230,40 +233,48 @@ public class Solitario
 		if (this.win == false) // se o jogo nao for ganho, devo ter a opçao de iniciar um novo jogo ou jogar com outro
 								// utilizador
 		{
-				System.out.println(
-						"Deseja recomeçar um novo ('N') jogo, jogar com outro utilizador ('L') ou terminar sessão ('E')?");
-				
-				decision = scan.nextLine();	
-				decision = decision.toUpperCase();
-				//System.out.println("A decisão é: " + decision);
-				if (decision.equals("N"))
-				{
-					this.novo_jogo = true;
-					this.terminar = false;
-					//SolitarioTeste();
-				}
-				else if (decision.equals("L"))
-				{
-					this.novo_jogo = false;
-					this.terminar = false;
-					Login();
-					//SolitarioTeste();
-				}
-				else //decision.equals("E") ou qualquer outro input termina sessao
-				{
-					this.terminar = true;
-					this.novo_jogo = false;					
-					System.out.println("Obrigado por jogar Solitário");
-					System.out.println("--> Sessão terminada <--");
-				}
+			System.out.println(
+					"Deseja recomeçar um novo ('N') jogo, jogar com outro utilizador ('L') ou terminar sessão ('E')?");
 
-			
+			decision = scan.nextLine();
+			decision = decision.toUpperCase();
+			// System.out.println("A decisão é: " + decision);
+			if (decision.equals("N"))
+			{
+				this.novo_jogo = true;
+				this.terminar = false;
+				// SolitarioTeste();
+			}
+			else if (decision.equals("L"))
+			{
+				this.novo_jogo = false;
+				this.terminar = false;
+				Login();
+				// SolitarioTeste();
+			}
+			else // decision.equals("E") ou qualquer outro input termina sessao
+			{
+				this.terminar = true;
+				this.novo_jogo = false;
+				System.out.println("Obrigado por jogar Solitário");
+				System.out.println("--> Sessão terminada <--");
+			}
+
 		}
 		else if (this.win == true)
 		{
 			System.out.println(" ### VITÓRIA! GANHOU O JOGO! ###");
 			System.out.println(" Neste jogo necessitou de " + this.jogo.getContajogadas() + " jogadas para ganhar.");
 			this.jogadorAtual.getVitorias().add(this.jogo.getContajogadas());
+			this.jogo = new Jogo();
+			this.jogo.start(); //comecamos um novo jogo para nao ficarmos perpetuamente num ciclo de dar load a uma
+			//vitoria e terminar o programa
+			this.jogo.saveJogo(this.jogadorAtual, this.registos, this.estanosregistos); // o numero de jogadas para a
+																						// vitoria fica guardado, mas o
+																						// resto do jogo nao
+			System.out.println("--> A sua vitória foi registada <--");
+			System.out.println("Obrigado por jogar Solitário");
+			System.out.println("--> Sessão terminada <--");
 			this.terminar = true;
 			this.novo_jogo = false;
 		}
@@ -276,15 +287,15 @@ public class Solitario
 
 	public static void main(String[] args)
 	{
-		Solitario game = new Solitario();
-		game.Login();
+		Solitario game = new Solitario(); // vamos jogar
+		game.Login(); // login inicial
 		do
 		{
 			game.jogaSolitario();
 			game.jogarSolitario();
-
 		}
-		while (game.getTerminar() == false);
+		while (game.getTerminar() == false); // enquanto nao for pedido para terminar sessão ou se ganhar vai estar
+												// sempre a correr
 	}
 
 }

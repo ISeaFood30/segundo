@@ -1,8 +1,7 @@
 package segundo;
 
 import java.util.*;
-
-//criei para nao mexer no jogo que estava a funcionar. e ja nao me lembro se podia mexer no jogo2 ou nao
+//Daniel Vieira uc:2019231996 e Sérgio Rodrigues uc:2019232338
 public class Jogo
 {
 	private Pilha[] baralho;
@@ -37,7 +36,8 @@ public class Jogo
 				baralho.getPilha().remove(carta);
 			}
 			pilhasT[i] = help;
-			// para por as cartas visiveis ou nao, no inicio
+
+			// para por as cartas visiveis ou nao, inicialmente
 			for (int iter = 0; iter < pilhasT[i].getPilha().size(); iter++)
 			{
 				if (iter == pilhasT[i].getPilha().size() - 1)
@@ -52,6 +52,7 @@ public class Jogo
 		}
 		this.baralho[0] = baralho;
 		this.baralho[1] = new Pilha();
+
 		for (int j = 0; j < 4; j++)
 		{
 			this.pilhasA[j] = new Pilha();
@@ -60,7 +61,7 @@ public class Jogo
 
 	}
 
-	public String Jogada()
+	public String Jogada() // pedir uma ação ao utilizador
 	{
 		Scanner scan = new Scanner(System.in);
 		System.out.println("P->Passar cartas | R->Rebobinar | M->Mover | T->Terminar Jogo");
@@ -72,7 +73,7 @@ public class Jogo
 
 	}
 
-	public void passarCartas()
+	public void passarCartas() // passar cartas até nao haver mais cartas no baralho da esquerda do monte disponivel
 	{
 		if (this.baralho[0].Size() == 0)
 		{
@@ -86,137 +87,182 @@ public class Jogo
 		}
 	}
 
-	public void moverCartasT(String origem, String destino)
+	public void moverCartasT(String origem, String tipo_de_origem, String destino) // mover para pilha de transiçao
 	{
 		try
 		{
-		Scanner sc = new Scanner(System.in);
-		if (origem.equals("BARALHO")) // mover do baralho para uma pilha de transição
-		{
-			int id_destinoA = Character.getNumericValue(destino.charAt(destino.length() - 1)) - 1;
-			Carta cartaA = this.baralho[1].getPilha().get(this.baralho[1].Size() - 1);
+			Scanner sc = new Scanner(System.in);
 
-			if (this.pilhasT[id_destinoA].Size() == 0 && cartaA.getRep().equals("K")) // o K tem de ser a primeira
-																						// nestas pilhas de
-																						// transição
+			if (origem.equals("BARALHO")) // mover do baralho para uma pilha de transição
 			{
-				this.pilhasT[id_destinoA].addCarta(cartaA);
-				this.baralho[1].removeCarta(cartaA);
-				this.contajogadas = this.contajogadas + 1;
+				int id_destinoA = Character.getNumericValue(destino.charAt(destino.length() - 1)) - 1;
+				Carta cartaA = this.baralho[1].getPilha().get(this.baralho[1].Size() - 1);
+
+				if (this.pilhasT[id_destinoA].Size() == 0 && cartaA.getRep().equals("K")) // o K tem de ser a primeira
+																							// nestas pilhas de
+																							// transiçao
+				{
+					this.pilhasT[id_destinoA].addCarta(cartaA);
+					this.baralho[1].removeCarta(cartaA);
+					this.contajogadas = this.contajogadas + 1;
+				}
+
+				else if (this.pilhasT[id_destinoA].Size() > 0
+						&& cartaA.getCor()
+								.equals(this.pilhasT[id_destinoA].getPilha().get(this.pilhasT[id_destinoA].Size() - 1)
+										.getCor()) == false
+						&& this.pilhasT[id_destinoA].getPilha().get(this.pilhasT[id_destinoA].Size() - 1).getValor()
+								- cartaA.getValor() == 1)
+				{
+					this.pilhasT[id_destinoA].addCarta(cartaA);
+					this.baralho[1].removeCarta(cartaA);
+					this.contajogadas = this.contajogadas + 1;
+				}
+
+				else
+				{
+					System.out.println("Essa operação não é permitida. Tente outra vez.");
+				}
+
 			}
-			else if (this.pilhasT[id_destinoA].Size() > 0
-					&& cartaA.getCor()
-							.equals(this.pilhasT[id_destinoA].getPilha().get(this.pilhasT[id_destinoA].Size() - 1)
-									.getCor()) == false
-					&& this.pilhasT[id_destinoA].getPilha().get(this.pilhasT[id_destinoA].Size() - 1).getValor()
-							- cartaA.getValor() == 1)
+
+			else if (tipo_de_origem.equals("PIL")) // mover de pilha de transição para pilha de transição
 			{
-				this.pilhasT[id_destinoA].addCarta(cartaA);
-				this.baralho[1].removeCarta(cartaA);
-				this.contajogadas = this.contajogadas + 1;
+				int id_origem = Character.getNumericValue(origem.charAt(origem.length() - 1)) - 1;
+
+				int id_destino = Character.getNumericValue(destino.charAt(destino.length() - 1)) - 1;
+
+				int n_cartas;
+				int indice_mover;
+				Carta carta;
+				Carta helper; // serve para perceber se apenas uma das cartas na pilha é visivel ou nao, para depois se
+								// decidir se pode mover mais do que uma carta
+
+				if (this.pilhasT[id_origem].Size() > 1)
+				{
+					helper = this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - 2);
+				}
+
+				else
+				{
+					helper = this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - 1);
+				}
+
+				if (helper.isVisible() == false || this.pilhasT[id_origem].Size() == 1)
+				{
+					n_cartas = 1;
+					indice_mover = this.pilhasT[id_origem].Size() - 1;
+					carta = this.pilhasT[id_origem].getPilha().get(indice_mover);
+				}
+
+				else
+				{
+					System.out.println("Quantas cartas quer mover?");
+					n_cartas = sc.nextInt();
+					sc.nextLine();
+					indice_mover = this.pilhasT[id_origem].Size() - n_cartas; // este é o indice da primeira carta
+																				// que
+																				// quero mover
+					carta = this.pilhasT[id_origem].getPilha().get(indice_mover); // para ver se a operação é possivel
+																					// ou não
+				}
+
+				while (carta.isVisible() == false)
+				{
+					System.out.println("Não pode mover tantas cartas.");
+					n_cartas = sc.nextInt();
+					indice_mover = this.pilhasT[id_origem].Size() - n_cartas; // este é o indice da primeira carta que
+																				// quero mover
+					carta = this.pilhasT[id_origem].getPilha().get(indice_mover); // para ver se a operação é possivel
+																					// ou não
+				}
+
+				if (this.pilhasT[id_destino].Size() == 0 && carta.getRep().equals("K")) // o rei tem de ser a primeira
+																						// nestas pilhas de transição
+				{
+					for (int j = n_cartas; j > 0; j--)
+					{
+						Carta carta_help = this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - j);
+						this.pilhasT[id_destino].addCarta(carta_help);
+						this.pilhasT[id_origem].removeCarta(carta_help);
+						this.contajogadas = this.contajogadas + 1;
+					}
+					if (this.pilhasT[id_origem].Size() != 0)
+					{
+						this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - 1).setVisible(true);
+					}
+				}
+
+				else if (this.pilhasT[id_destino].Size() > 0
+						&& carta.getCor()
+								.equals(this.pilhasT[id_destino].getPilha().get(this.pilhasT[id_destino].Size() - 1)
+										.getCor()) == false
+						&& this.pilhasT[id_destino].getPilha().get(this.pilhasT[id_destino].Size() - 1).getValor()
+								- carta.getValor() == 1)
+				{
+					for (int j = n_cartas; j > 0; j--)
+					{
+						Carta carta_help = this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - j);
+						this.pilhasT[id_destino].addCarta(carta_help);
+						this.pilhasT[id_origem].removeCarta(carta_help);
+						this.contajogadas = this.contajogadas + 1;
+					}
+					if (this.pilhasT[id_origem].Size() != 0)
+					{
+						this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - 1).setVisible(true);
+					}
+				}
+				else
+				{
+					System.out.println("Essa operação não é permitida. Tente outra vez.");
+				}
+			}
+			else if (tipo_de_origem.equals("ARM")) // mover de armazenamento para transicao
+			{
+				int id_origem = Character.getNumericValue(origem.charAt(origem.length() - 1)) - 1;
+
+				int id_destino = Character.getNumericValue(destino.charAt(destino.length() - 1)) - 1;
+
+				Carta carta;
+
+				carta = this.pilhasA[id_origem].getPilha().get(this.pilhasA[id_origem].Size() - 1); // ultima carta do
+																									// arm
+
+				if (this.pilhasT[id_destino].Size() == 0 && carta.getRep().equals("K")) // o rei tem de ser a primeira
+																						// nestas pilhas de transição
+				{
+					this.pilhasT[id_destino].addCarta(carta);
+					this.pilhasA[id_origem].removeCarta(carta);
+					this.contajogadas = this.contajogadas + 1;
+				}
+
+				else if (this.pilhasT[id_destino].Size() > 0
+						&& carta.getCor()
+								.equals(this.pilhasT[id_destino].getPilha().get(this.pilhasT[id_destino].Size() - 1)
+										.getCor()) == false
+						&& this.pilhasT[id_destino].getPilha().get(this.pilhasT[id_destino].Size() - 1).getValor()
+								- carta.getValor() == 1)
+				{
+					this.pilhasT[id_destino].addCarta(carta);
+					this.pilhasA[id_origem].removeCarta(carta);
+					this.contajogadas = this.contajogadas + 1;
+				}
+				else
+				{
+					System.out.println("Essa operação não é permitida. Tente outra vez.");
+				}
 			}
 			else
 			{
 				System.out.println("Essa operação não é permitida. Tente outra vez.");
 			}
+
 		}
-
-		else // de pilha de transição para pilha de transição
+		catch (Exception e)
 		{
-			int id_origem = Character.getNumericValue(origem.charAt(origem.length() - 1)) - 1;
-			//System.out.println("Pilha de origem:" + id_origem);
-			int id_destino = Character.getNumericValue(destino.charAt(destino.length() - 1)) - 1;
-			//System.out.println("Pilha de destino:" + id_destino);
-
-			int n_cartas;
-			int indice_mover;
-			Carta carta;
-			Carta helper; // serve para perceber se apenas uma das cartas na pilha é visivel ou nao, para depois se
-							// decidir se pode mover mais do que uma carta
-			if (this.pilhasT[id_origem].Size() > 1)
-			{
-				helper = this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - 2);
-			}
-			else 
-			{
-				helper = this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - 1);
-			}
-
-
-			if (helper.isVisible() == false || this.pilhasT[id_origem].Size() == 1)
-			{
-				n_cartas = 1;
-				indice_mover = this.pilhasT[id_origem].Size() - 1;
-				carta = this.pilhasT[id_origem].getPilha().get(indice_mover);
-			}
-			else
-			{
-				System.out.println("Quantas cartas quer mover?");
-				n_cartas = sc.nextInt();
-				sc.nextLine();
-				indice_mover = this.pilhasT[id_origem].Size() - n_cartas; // este é o indice da primeira carta
-																			// que
-																			// quero mover
-				carta = this.pilhasT[id_origem].getPilha().get(indice_mover); // para ver se a operação é possivel
-																				// ou não
-			}
-
-			while (carta.isVisible() == false)
-			{
-				System.out.println("Não pode mover tantas cartas.");
-				n_cartas = sc.nextInt();
-				indice_mover = this.pilhasT[id_origem].Size() - n_cartas; // este é o indice da primeira carta que
-																			// quero mover
-				carta = this.pilhasT[id_origem].getPilha().get(indice_mover); // para ver se a operação é possivel
-																				// ou não
-			}
-
-			if (this.pilhasT[id_destino].Size() == 0 && carta.getRep().equals("K")) // o rei tem de ser a primeira
-																					// nestas pilhas de transição
-			{
-				for (int j = n_cartas; j > 0; j--)
-				{
-					Carta carta_help = this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - j);
-					this.pilhasT[id_destino].addCarta(carta_help);
-					this.pilhasT[id_origem].removeCarta(carta_help);
-					this.contajogadas = this.contajogadas + 1;
-				}
-				if (this.pilhasT[id_origem].Size() != 0)
-				{
-					this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - 1).setVisible(true);
-				}
-			}
-
-			else if (this.pilhasT[id_destino].Size() > 0
-					&& carta.getCor()
-							.equals(this.pilhasT[id_destino].getPilha().get(this.pilhasT[id_destino].Size() - 1)
-									.getCor()) == false
-					&& this.pilhasT[id_destino].getPilha().get(this.pilhasT[id_destino].Size() - 1).getValor()
-							- carta.getValor() == 1)
-			{
-				for (int j = n_cartas; j > 0; j--)
-				{
-					Carta carta_help = this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - j);
-					this.pilhasT[id_destino].addCarta(carta_help);
-					this.pilhasT[id_origem].removeCarta(carta_help);
-					this.contajogadas = this.contajogadas + 1;
-				}
-				if (this.pilhasT[id_origem].Size() != 0)
-				{
-					this.pilhasT[id_origem].getPilha().get(this.pilhasT[id_origem].Size() - 1).setVisible(true);
-				}
-			}
-			else
-			{
-				System.out.println("Essa operação não é permitida. Tente outra vez.");
-			}
+			System.out.println("Verifique o que escreveu. Tente outra vez");
 		}
 	}
-	 catch (Exception e)
-	 {
-	 System.out.println("Verifique o que escreveu. Tente outra vez");
-	 }
-	 }
 
 	public void moverCartasA(String origemT, String destinoA) // mover cartas desde baralho ou transição para o
 																// armazenamento
@@ -226,7 +272,7 @@ public class Jogo
 			if (origemT.equals("BARALHO")) // mover do baralho para o armazenamento
 			{
 				int id_destinoA = Character.getNumericValue(destinoA.charAt(destinoA.length() - 1)) - 1;
-				Carta cartaA = this.baralho[1].getPilha().get(this.baralho[1].Size() - 1);
+				Carta cartaA = this.baralho[1].getPilha().get(this.baralho[1].Size() - 1); // carta que se vai mover
 				if (this.pilhasA[id_destinoA].Size() == 0 && cartaA.getRep().equals("A")) // o Às tem de ser a primeira
 																							// nestas pilhas de
 																							// armazenamento
@@ -251,7 +297,7 @@ public class Jogo
 					System.out.println("Essa operação não é permitida. Tente outra vez.");
 				}
 			}
-			else
+			else //mover de uma pilha de transição para uma pilha de armazenamento
 			{
 				int id_origemT = Character.getNumericValue(origemT.charAt(origemT.length() - 1)) - 1;
 				int id_destinoA = Character.getNumericValue(destinoA.charAt(destinoA.length() - 1)) - 1;
@@ -268,6 +314,7 @@ public class Jogo
 						this.pilhasT[id_origemT].getPilha().get(this.pilhasT[id_origemT].Size() - 1).setVisible(true);
 					}
 				}
+
 				else if (this.pilhasA[id_destinoA].Size() > 0
 						&& carta.getNaipe()
 								.equals(this.pilhasA[id_destinoA].getPilha().get(this.pilhasA[id_destinoA].Size() - 1)
@@ -283,6 +330,7 @@ public class Jogo
 						this.pilhasT[id_origemT].getPilha().get(this.pilhasT[id_origemT].Size() - 1).setVisible(true);
 					}
 				}
+
 				else
 				{
 					System.out.println("Essa operação não é permitida. Tente outra vez.");
@@ -311,7 +359,6 @@ public class Jogo
 		}
 	}
 
-	// tanto no load como save ainda faltam algumas coisas que podem ser uteis e importante gravar
 	public void saveJogo(Jogador jogadorAtual, ArrayList<Jogador> registos, boolean estanosresgistos)
 	{
 		jogadorAtual.setArmazenamento(this.pilhasA);
@@ -339,7 +386,6 @@ public class Jogo
 		Jogador.write(registos);
 	}
 
-	// prototipo de dar load do jogo em relacao ao jogador que esta nos registos
 	public void loadJogo(Jogador jogadorAtual)
 	{
 		this.setBaralho(jogadorAtual.getBaralho());
@@ -476,7 +522,7 @@ public class Jogo
 
 	}
 
-	public boolean jogoWin()
+	public boolean jogoWin() // serve para saber se o jogo foi ganho ou não
 	{
 		boolean acabou_ou_nao = false;
 		int contador = 0;
@@ -488,7 +534,8 @@ public class Jogo
 				Carta ajudante = this.pilhasA[i].getPilha().get(this.pilhasA[i].Size() - 1);
 				if (ajudante.getRep().equals("K") == true)
 				{
-					contador = contador + 1; // se regras estiverem bem a ultima carta das pilhasA vai ser o rei e nao
+					contador = contador + 1; // se regras estiverem bem implementadas, na condição de vitoria a ultima
+												// carta das pilhasA vai ser o rei e nao
 					// havera mais nenhuma quando as 4 tiverem um rei na ultima
 				}
 

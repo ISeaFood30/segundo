@@ -1,20 +1,21 @@
 package segundo;
 
 import java.io.Serializable;
-
+//Daniel Vieira uc:2019231996 e Sérgio Rodrigues uc:2019232338
 public class Carta implements Serializable
 {
 	private String naipe;
-	private int valor; // 1 até 13, 1 é o Ás(A), 13 é Rei(K), 12 é dama (Q), 11 é valete (J), 2 a 10 é normal
-	private String cor;
+	private int valor; // 1 até 13, 1 é o Ás(A), 13 é Rei(K), 12 é dama (Q), 11 é valete (J), 2 a 10 o valor corresponde
+						// ao número
+	private String cor; // vermelho ou preto
 	private String rep; // representação do valor da carta, 2 a 10, J,Q,K,A
-	private boolean visible;	
+	private boolean visible; // a carta está virada para cima ou para baixo, true ou false
 
 	public Carta(String rep, String naipe)
 	{
 		this.rep = rep;
 		this.naipe = naipe;
-		
+
 		if (rep.equals("A"))
 		{
 			this.valor = 1;
@@ -67,7 +68,7 @@ public class Carta implements Serializable
 		{
 			this.valor = 10;
 		}
-		
+
 		if (naipe.equals("E") || naipe.equals("P"))
 		{
 			this.cor = "Preto";
@@ -76,7 +77,7 @@ public class Carta implements Serializable
 		{
 			this.cor = "Vermelho";
 		}
-		
+
 		this.visible = false;
 	}
 
@@ -120,44 +121,6 @@ public class Carta implements Serializable
 		this.rep = rep;
 	}
 
-	public String toString() // para fazer print da carta visivel
-	{
-		String s;
-		String s1 = "----- \n";
-		String s2 = null;
-		if (this.rep != "10")
-		{
-			s2 = "| " + this.rep + " | \n";
-		}
-		else if (this.rep == "10")
-		{
-			s2 = "| " + this.rep + "| \n";
-		}
-
-		String s3 = "| " + this.naipe + " | \n";
-		String s4 = "----- \n";
-
-		s = s1 + s2 + s3 + s4;
-		return s;
-	}
-
-	public String cartaOculta()
-	{
-		String s;
-		String s1 = "----- \n";
-
-
-		String s2 = "|   | \n";
-
-
-		String s3 = "|   | \n";
-
-		String s4 = "----- \n";
-
-		s = s1 + s2 + s3 + s4;
-		return s;
-	}
-	
 	public boolean isVisible()
 	{
 		return visible;
